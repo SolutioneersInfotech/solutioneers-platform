@@ -1,0 +1,15 @@
+@use '../scss/theme.module' as *;
+@use '../scss/header.scss' as *;
+@use './page.module.scss';
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    min-height: 100svh;
+    width:100%;
+    background: $foreground;
+    color: $text-color;
+    position: relative;
+}

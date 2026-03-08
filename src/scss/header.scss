@@ -1,0 +1,182 @@
+@use './theme.module' as *;
+@use './mixin.module' as *;
+@use './font.module' as *;
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: transparent;
+    z-index: 100;
+    /* Keeps header above page content */
+}
+
+.contentBx {
+    position: relative;
+    height: 100%;
+    width: 95%;
+    max-width: 1600px;
+    /* Limits stretching on 4K screens */
+    margin-inline: auto;
+    /* Centers the container */
+    padding-inline: 1.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: $radius-capsule;
+    z-index: 1;
+
+    /* THE MAGIC TRICK: Glassmorphism on pseudo-element */
+    /* This allows the child <nav> to blur the background without getting trapped! */
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: rgba($color: #000000, $alpha: .2);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba($color: #ffffff, $alpha: .1);
+        z-index: -1;
+    }
+}
+
+.logo {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 700;
+    color: $text-color;
+    text-decoration: none;
+    font-family: $font-display;
+    z-index: 2;
+}
+
+nav {
+    /* MOBILE FIRST: Hidden Dropdown */
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+    border-radius: $radius-default;
+    font-family: $font-sans;
+    background: rgba($color: #000000, $alpha: .3);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba($color: #ffffff, $alpha: .1);
+
+    /* Animation states */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    ul {
+        padding-block: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        list-style: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+
+        li a {
+            cursor: pointer;
+            color: $text-color;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: $accent;
+            }
+        }
+    }
+
+    /* DESKTOP/4K RESPONSIVE (1024px and up) */
+    @media (min-width: 768px) {
+        position: static;
+        width: auto;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+
+        /* Always visible on desktop */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: none;
+
+        ul {
+            padding-block: 0;
+            flex-direction: row;
+            gap: 2.5rem;
+            font-size: 1rem;
+        }
+    }
+}
+
+.cta {
+    display: none;
+    /* Hidden on mobile */
+    z-index: 2;
+
+    @media (min-width: 768px) {
+        display: block;
+        /* Visible on desktop */
+    }
+}
+
+.mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    width: 25px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+
+    .bar {
+        width: 100%;
+        height: 2px;
+        background-color: $text-color;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        transform-origin: left center;
+    }
+
+    /* Transforms hamburger into an 'X' when open */
+    &.active {
+        .bar:nth-child(1) {
+            transform: rotate(45deg);
+        }
+
+        .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .bar:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+    }
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}

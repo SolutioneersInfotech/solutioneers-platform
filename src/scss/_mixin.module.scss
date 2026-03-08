@@ -1,0 +1,40 @@
+
+@use "sass:color";
+
+// Shared layout and accessibility helpers
+$container-max: 100% !default;
+$radius-full: 100%;
+$radius-capsule: 50px;
+$radius-default: 15px;
+@mixin smooth-font {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin container($max-width: $container-max) {
+    width: 100%;
+    max-width: $max-width;
+    margin-inline: auto;
+    padding: clamp(12px, 2vw, 16px) calc(clamp(20px, 5vw, 100px) + env(safe-area-inset-left)) clamp(12px, 2vw, 16px) calc(clamp(20px, 5vw, 100px) + env(safe-area-inset-right));
+
+    @media (max-width: 1024px) {
+        padding-inline: 50px;
+    }
+
+    @media (max-width: 768px) {
+        padding-inline: 20px;
+    }
+}
+
+@mixin focus-ring($color) {
+    outline: 3px solid color.change($color, $alpha: 0.18);
+    outline-offset: 2px;
+}
+
+/// Apply styles only when dark theme is active.
+/// Must be called inside a selector (uses `&`).
+@mixin dark-mode {
+    :global(html[data-theme="dark"]) & {
+        @content;
+    }
+}

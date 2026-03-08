@@ -1,0 +1,39 @@
+// Centralized font declarations for global usage
+@font-face {
+    font-family: "Urbanist";
+    src: url("/Urbanist-Regular.woff") format("woff");
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "JetBrains Mono";
+    src: url("/JetBrainsMono-VariableFont_wght.woff2") format("woff2");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("/Inter.woff2") format("woff2");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "BwGradual";
+    src: url("/BwGradual-Medium.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+$font-display: "BwGradual", "Segoe UI", system-ui, -apple-system, sans-serif;
+$font-mono: "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+$font-sans: "Urbanist", system-ui, -apple-system, sans-serif;
+$font-family-base: $font-sans;
+
+:root {
+    --font-sans: #{$font-sans};
+    --font-mono: #{$font-mono};
+    --font-display: #{$font-display};
+}
