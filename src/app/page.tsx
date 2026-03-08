@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className='page'>page</div>
+    <section className='hero' id='#home'>page</section>
   )
 }

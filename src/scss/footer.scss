@@ -1,0 +1,185 @@
+@use './mixin.module' as *;
+@use './theme.module' as *;
+@use './font.module' as *;
+@use "sass:color";
+
+.footer {
+    @include container;
+    background: #000015;
+    color: $text-color;
+    font-family: $font-sans;
+
+    padding-block: clamp(3rem, 6vw, 5rem);
+
+    border-radius: $radius-default $radius-default 0 0;
+    border: 1px solid rgba(255, 255, 255, .4);
+    border-bottom-color: #000015;
+}
+
+
+.upperSection {
+    @include flex(start, row, space-between);
+    gap: clamp(2rem, 4vw, 6rem);
+    padding-bottom: clamp(2rem, 4vw, 4rem);
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    .contactInfo {
+        @include flex(start, column, start);
+        gap: clamp(1rem, 2vw, 1.5rem);
+        max-width: 650px;
+
+        h4 {
+            margin: 0;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-family: $font-display;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 5vw, 3rem);
+            font-family: $font-display;
+            text-transform: capitalize;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        span {
+            font-size: clamp(.9rem, 1.2vw, 1rem);
+            color: $text-color;
+            text-transform: uppercase;
+        }
+
+        .dotted-mail {
+            padding: .65rem 1.25rem;
+            background: color.adjust($background, $lightness: 10%);
+            color: color.adjust($text-color, $lightness: 0%);
+            border: 2px dashed $text-color;
+            border-radius: $radius-capsule;
+            font-size: clamp(.9rem, 1vw, 1rem);
+            cursor: pointer;
+            transition: background .3s ease, color .3s ease;
+
+            &:hover {
+                background: $text-color;
+                color: #000015;
+            }
+        }
+    }
+}
+
+.footer-links {
+    @include flex(start, row, flex-start);
+    margin-left: auto;
+    gap: clamp(2rem, 5vw, 4rem);
+    flex-wrap: wrap;
+
+    @media (max-width:768px) {
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    @media (max-width:480px) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .quick-links,
+    .informations {
+        min-width: 160px;
+
+        h3 {
+            font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+            font-family: $font-display;
+            margin-bottom: clamp(1rem, 2vw, 2rem);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+
+            li {
+                a {
+                    color: $text-color;
+                    text-decoration: none;
+                    font-size: clamp(.9rem, 1vw, 1rem);
+                    transition: color .3s ease;
+
+                    &:hover {
+                        color: $accent;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+hr {
+    border: 1px solid $text-color;
+    margin-block: clamp(.75rem, 2vw, 1rem);
+}
+
+
+.lowerSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @media (max-width:640px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    p {
+        font-size: clamp(.8rem, 1vw, .95rem);
+    }
+
+    .socialLinks {
+        @include flex(center);
+        gap: .75rem;
+        list-style: none;
+
+        li {
+            a {
+                color: $text-color;
+                font-size: clamp(1rem, 1.2vw, 1.2rem);
+                transition: color .3s ease;
+                text-decoration: none;
+
+                &:hover {
+                    color: $accent;
+                }
+            }
+        }
+    }
+}
+
+
+@media (min-width:2000px) {
+
+    .footer {
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .upperSection {
+        gap: 8rem;
+    }
+
+    .footer-links {
+        gap: 6rem;
+    }
+
+}

@@ -1,31 +1,52 @@
 @use '../../../scss/mixin.module' as *;
 @use '../../../scss/theme.module' as *;
-@use 'sass:color';
-.btn{
-    position: relative;
-    padding: 0.5rem 1.5rem;
-    border: none;
+.button-wrapper {
+    display: inline-flex;
+    padding: .5px;
     border-radius: $radius-capsule;
     background: $accent;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
+}
+
+.button {
+    color: $text-color;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
-    box-shadow: 3px 3px 6px color.adjust($foreground, $lightness: 30%);
-    transition: background 0.3s ease;
-    &:hover{
-        background: color.adjust($accent, $lightness: -10%);
+    padding: .75rem 2rem;
+    border-radius: $radius-capsule;
+
+    font-weight: 700;
+    font-size: 1.1rem;
+
+    cursor: pointer;
+    transition: all .3s ease;
+
+    @include translate-hover();
+
+    &--gradient {
+        @include btn-gradient;
     }
-    // &::before{
-    //     content: '';
-    //     position: absolute;
-    //     top: 10px;
-    //     left: 10px;
-    //     width: 100%;
-    //     height: 100%;
-    //     border-radius: $radius-capsule;
-    //     background: rgb(255, 0, 0);
-    //     opacity: 1;
-    //     transition: opacity 0.3s ease;
-    // }
+
+    &--solid {
+        @include btn-solid(#4f46e5, white);
+    }
+
+    &--shadow {
+        @include btn-solid(#4f46e5, white);
+        @include btn-shadow;
+    }
+
+    &--outline {
+        @include btn-outline(#4f46e5);
+    }
+
+    &--link {
+        @include btn-link(#4f46e5);
+    }
+
+    &.disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
 }

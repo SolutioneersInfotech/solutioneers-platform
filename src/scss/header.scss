@@ -14,17 +14,14 @@
     padding: 1rem;
     background: transparent;
     z-index: 100;
-    /* Keeps header above page content */
 }
 
 .contentBx {
     position: relative;
     height: 100%;
     width: 95%;
-    max-width: 1600px;
-    /* Limits stretching on 4K screens */
+    max-width: 100%;
     margin-inline: auto;
-    /* Centers the container */
     padding-inline: 1.5rem;
 
     display: flex;
@@ -33,14 +30,12 @@
     border-radius: $radius-capsule;
     z-index: 1;
 
-    /* THE MAGIC TRICK: Glassmorphism on pseudo-element */
-    /* This allows the child <nav> to blur the background without getting trapped! */
     &::before {
         content: '';
         position: absolute;
         inset: 0;
         border-radius: inherit;
-        background: rgba($color: #000000, $alpha: .2);
+        background: rgba($color: #666666, $alpha: .1);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         border: 1px solid rgba($color: #ffffff, $alpha: .1);
@@ -58,7 +53,6 @@
 }
 
 nav {
-    /* MOBILE FIRST: Hidden Dropdown */
     position: absolute;
     top: calc(100% + 10px);
     left: 0;
@@ -105,7 +99,6 @@ nav {
         }
     }
 
-    /* DESKTOP/4K RESPONSIVE (1024px and up) */
     @media (min-width: 768px) {
         position: static;
         width: auto;
@@ -161,7 +154,6 @@ nav {
         transform-origin: left center;
     }
 
-    /* Transforms hamburger into an 'X' when open */
     &.active {
         .bar:nth-child(1) {
             transform: rotate(45deg);

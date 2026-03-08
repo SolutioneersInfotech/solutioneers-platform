@@ -11,6 +11,13 @@ $radius-default: 15px;
     -moz-osx-font-smoothing: grayscale;
 }
 
+@mixin flex($justify: center, $direction: row, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
 @mixin container($max-width: $container-max) {
     width: 100%;
     max-width: $max-width;
@@ -31,6 +38,67 @@ $radius-default: 15px;
     outline-offset: 2px;
 }
 
+@mixin translate-hover($duration: 0.3s,
+    $easing: ease-out) {
+    .btn-text-container {
+        position: relative;
+        overflow: hidden;
+        width: max-content;
+        margin: auto;
+    }
+
+    .btn-text {
+        transition: transform $duration $easing;
+    }
+
+    .btn-text-hover {
+        position: absolute;
+        inset: 0;
+        transform: translateY(100%);
+        transition: transform $duration $easing;
+    }
+
+    &:hover {
+        .btn-text {
+            transform: translateY(-100%);
+        }
+
+        .btn-text-hover {
+            transform: translateY(0);
+        }
+    }
+}
+@mixin btn-link($color) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: $color;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+@mixin btn-outline($color) {
+    background: transparent;
+    border: 2px solid $color;
+    color: $color;
+}
+@mixin btn-shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+        box-shadow: 0 0 40px 5px rgba(232, 96, 46, 0.5);
+    }
+}
+@mixin btn-gradient {
+    background: linear-gradient(96.76deg,
+            rgb(232, 96, 46) 5.3%,
+            rgb(52, 14, 0) 234.66%) right center / 150% 100%;
+}
+@mixin btn-solid($bg, $color) {
+    background: $bg;
+    color: $color;
+}
 /// Apply styles only when dark theme is active.
 /// Must be called inside a selector (uses `&`).
 @mixin dark-mode {

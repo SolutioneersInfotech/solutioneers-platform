@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import Button from './ui/button/button';
+import { Button } from './ui/button/button';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Header() {
         </nav>
 
         <div className="cta">
-          <Button href="/#contact" text="Get in Touch" />
+          <Button href="/#contact">Get in Touch</Button>
         </div>
 
         {/* Added dynamic active class for hamburger animation */}

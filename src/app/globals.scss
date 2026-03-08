@@ -1,6 +1,7 @@
 @use '../scss/theme.module' as *;
 @use '../scss/header.scss' as *;
 @use './page.module.scss';
+@use '../scss/footer.scss';
 *{
     margin: 0;
     padding: 0;
@@ -9,7 +10,7 @@
 html,body{
     min-height: 100svh;
     width:100%;
-    background: $foreground;
+    background: conic-gradient(from 180deg, $background, $foreground, $background, $foreground, $background);
     color: $text-color;
     position: relative;
 }
