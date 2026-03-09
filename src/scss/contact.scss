@@ -1,0 +1,214 @@
+@use './font.module' as *;
+@use './mixin.module' as *;
+@use './theme.module' as *;
+@use 'sass:color';
+
+.contact {
+    margin-block: clamp(3rem, 6vw, 6rem);
+    @include container(1300px);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "left right";
+    gap: clamp(1.5rem, 3vw, 3rem);
+
+    font-family: $font-sans;
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "left"
+            "right";
+    }
+}
+
+/* LEFT SIDE */
+
+.left-info {
+    grid-area: left;
+
+    @include flex(column, start, center);
+    gap: clamp(1rem, 2vw, 1.5rem);
+
+    color: $text-color;
+    text-transform: capitalize;
+
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.75rem);
+        font-weight: 700;
+    }
+
+    p {
+        font-size: clamp(.9rem, 1vw, 1rem);
+        color: $muted-color;
+        max-width: 500px;
+    }
+}
+
+/* CONTACT CARDS */
+
+.contact-info {
+    @include flex(column, start, center);
+    gap: clamp(1rem, 2vw, 1.5rem);
+    width: 100%;
+    color: $text-color;
+
+    .contact-item {
+        width: 100%;
+        @include flex(row, center, start);
+
+        border: 1px solid rgba(#fff, .1);
+        padding: clamp(.75rem, 1vw, 1rem);
+        border-radius: $radius-medium;
+
+        backdrop-filter: blur(8px);
+        background: rgba(#fff, .05);
+
+        transition: all .3s ease;
+
+        &:hover {
+            transform: scale(1.02);
+            border-color: rgba(#fff, .25);
+        }
+
+        /* Mobile improvement */
+        @media (max-width: 480px) {
+            flex-direction: row;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        &>svg {
+            padding: .5rem;
+            border-radius: $radius-full;
+
+            color: color.adjust($muted-color, $lightness: 40%);
+            border: 1px solid rgba(#fff, .25);
+
+            font-size: clamp(1.75rem, 2vw, 2.25rem);
+            rotate: 45deg;
+
+            transition: rotate .5s ease;
+            @media (max-width: 425px) {
+                display: none;
+            }
+        }
+
+        &:hover>svg {
+            rotate: 90deg;
+        }
+
+        &:nth-child(1) a .card-icon,
+        &:nth-child(2) a .card-icon,
+        &:nth-child(3) a .card-icon {
+            background: color.scale($accent, $lightness: -20%);
+
+            svg {
+                color: color.adjust($accent, $lightness: 50%);
+            }
+        }
+    }
+
+    a {
+        @include flex(row, center, start);
+        gap: .75rem;
+
+        width: 100%;
+        text-decoration: none;
+        color: $text-color;
+
+        font-size: clamp(.65rem, .9vw, .9rem);
+
+        .card-icon {
+            @include flex(row, center, center);
+
+            padding: .5rem;
+            border: 1px solid rgba(#fff, .25);
+            border-radius: $radius-small;
+
+            font-size: clamp(1rem, 1.2vw, 1.25rem);
+
+            svg {
+                color: $text-color;
+            }
+        }
+
+        div p {
+            color: color.adjust($text-color, $lightness: -20%);
+        }
+    }
+}
+
+/* RIGHT SIDE FORM */
+
+.right-form {
+    grid-area: right;
+
+    height: 100%;
+
+    border: 1px solid rgba(#fff, .1);
+    border-radius: $radius-medium;
+
+    backdrop-filter: blur(8px);
+    background: rgba(#fff, .05);
+
+    padding: clamp(1rem, 2vw, 2rem);
+
+    @include flex(column, start, start);
+    gap: .5rem;
+
+    h3 {
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        color: $text-color;
+    }
+
+    p {
+        color: $muted-color;
+        font-size: clamp(.85rem, 1vw, 1rem);
+    }
+
+    form {
+        width: 100%;
+        height: 100%;
+
+        @include flex(column, start, space-between);
+        gap: 1rem;
+    }
+}
+
+/* FORM GROUP */
+
+.form-group {
+    width: 100%;
+
+    @include flex(row, start, start);
+    gap: .75rem;
+
+    /* Mobile stack */
+    @media (max-width: 640px) {
+        flex-direction: column;
+    }
+}
+
+/* SUBMIT BUTTON */
+
+.submit {
+    width: 100%;
+    border: none;
+}
+
+/* ULTRA WIDE (4K MONITORS) */
+
+@media (min-width: 2560px) {
+    .contact {
+        max-width: 1600px;
+        margin-inline: auto;
+    }
+}

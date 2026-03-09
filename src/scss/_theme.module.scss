@@ -6,3 +6,23 @@ $text-color: #ffffff;
 $body-color: $tint;
 $muted-color: #5b6c84;
 $bg: $background;
+
+/* Input variables */
+$input-radius: 8px;
+$input-padding-x: 16px;
+$input-height-sm: 40px;
+$input-height-md: 48px;
+$input-height-lg: 56px;
+
+$input-border: $accent;
+$input-border-focus: #5b7cff;
+$input-border-error: #ff4d4f;
+$input-border-success: #22c55e;
+
+$input-bg: $background;
+$input-text: $text-color;
+$input-placeholder: $muted-color;
+
+$input-font-sm: 14px;
+$input-font-md: 15px;
+$input-font-lg: 16px;

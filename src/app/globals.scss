@@ -1,16 +1,54 @@
 @use '../scss/theme.module' as *;
+@use '../scss/mixin.module' as *;
 @use '../scss/header.scss' as *;
 @use './page.module.scss';
+@use '../scss/contact.scss';
 @use '../scss/footer.scss';
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html,body{
-    min-height: 100svh;
-    width:100%;
-    background: conic-gradient(from 180deg, $background, $foreground, $background, $foreground, $background);
+
+html,
+body {
+    height: 100%;
+    width: 100%;
     color: $text-color;
-    position: relative;
+}
+
+/* Fixed background layer */
+
+body {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+
+    background: conic-gradient(from 180deg,
+            $background,
+            $foreground,
+            $background,
+            $foreground,
+            $background );
+}
+
+/* Scrollable layer */
+
+.scroll-container {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page content */
+
+main {
+    @include container;
+    flex: 1;
 }

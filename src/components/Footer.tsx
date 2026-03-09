@@ -39,7 +39,7 @@ export default function Footer() {
       </div>
       <hr />
       <div className="lowerSection">
-        <p>Copyright © {new Date().getFullYear()} Solutioneers. All rights reserved.</p>
+        <p>Copyright © {new Date().getFullYear()} Solutioneers Infotech Pvt. Ltd. All rights reserved.</p>
         <ul className="socialLinks">
           <li><Link href="https://www.facebook.com/solutioneers" target="_blank" rel="noopener noreferrer"><FaFacebookF /></Link></li>
           <li><Link href="https://www.linkedin.com/company/solutioneers" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></Link></li>

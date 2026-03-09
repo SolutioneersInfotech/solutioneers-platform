@@ -18,7 +18,7 @@
 
 
 .upperSection {
-    @include flex(start, row, space-between);
+    @include flex(row, start, space-between);
     gap: clamp(2rem, 4vw, 6rem);
     padding-bottom: clamp(2rem, 4vw, 4rem);
     flex-wrap: wrap;
@@ -28,7 +28,7 @@
     }
 
     .contactInfo {
-        @include flex(start, column, start);
+        @include flex(column, start, start);
         gap: clamp(1rem, 2vw, 1.5rem);
         max-width: 650px;
 

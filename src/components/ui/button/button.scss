@@ -1,5 +1,6 @@
 @use '../../../scss/mixin.module' as *;
 @use '../../../scss/theme.module' as *;
+@use '../../../scss/font.module' as *;
 .button-wrapper {
     display: inline-flex;
     padding: .5px;
@@ -15,7 +16,7 @@
     text-decoration: none;
     padding: .75rem 2rem;
     border-radius: $radius-capsule;
-
+    font-family: $font-sans;
     font-weight: 700;
     font-size: 1.1rem;
 
