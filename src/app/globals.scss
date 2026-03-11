@@ -189,11 +189,7 @@ main {
     }
 }
 
-/* Service overrides */
-.grid-container .gridBx {
-    border-color: var(--text-color);
-    background: var(--service-card-bg);
-}
+/* Service overrides — border & bg handled in service.scss via CSS vars */
 
 /* Review overrides */
 .review-card {

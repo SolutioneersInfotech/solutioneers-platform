@@ -1,48 +1,421 @@
 @use './theme.module' as *;
 @use './mixin.module' as *;
 @use './font.module' as *;
-@use "sass:color";
+
+/* ================================================
+   Services Section
+================================================ */
 
 .services {
     @include container(1300px);
-    margin-block: 5rem;
-    // min-height: 100svh;
+    margin-block: clamp(3rem, 6vw, 7rem);
 }
+
+/* ================================================
+   Bento Grid
+================================================ */
 
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-areas: "one two two " "one three four" "five five four";
-    gap: 2rem;
+    grid-template-rows: repeat(3, minmax(clamp(180px, 20vw, 300px), auto));
+    grid-template-areas:
+        "one two  two"
+        "one three four"
+        "five five four";
+    gap: clamp(.875rem, 1.25vw, 1.25rem);
+}
 
+/* ================================================
+   Base Card
+================================================ */
+
+.gridBx {
+    position: relative;
+    padding: clamp(1.25rem, 2vw, 2rem);
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: $radius-default;
+    overflow: hidden;
+    @include flex(column, start, start);
+    gap: clamp(.65rem, .9vw, .9rem);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        border-color: var(--card-border-hover);
+        transform: translateY(-3px);
+    }
+
+    &:nth-child(1) {
+        grid-area: one;
+    }
+
+    &:nth-child(2) {
+        grid-area: two;
+    }
+
+    &:nth-child(3) {
+        grid-area: three;
+    }
+
+    &:nth-child(4) {
+        grid-area: four;
+    }
+
+    &:nth-child(5) {
+        grid-area: five;
+    }
+}
+
+/* ================================================
+   Card Variants
+================================================ */
+
+/* Featured — Box 1 (Web Dev, tall left) */
+.gridBx--featured {
+    border-color: var(--card-border-hover);
+
+    /* Top accent line */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--accent);
+        opacity: 0.75;
+        border-radius: $radius-default $radius-default 0 0;
+        z-index: 1;
+    }
+
+    /* Radial glow from top-left */
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at top left, var(--accent), transparent 65%);
+        opacity: 0.07;
+        pointer-events: none;
+        border-radius: inherit;
+    }
+
+    >* {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* Intro — Box 2 (section header, wide top) */
+.gridBx--intro {
+    gap: clamp(.6rem, .85vw, .85rem);
+    justify-content: flex-start;
+}
+
+/* Wide — Box 5 (UI/UX, wide bottom) */
+.gridBx--wide {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+/* ================================================
+   Service Number Badge
+================================================ */
+
+.service-number {
+    display: inline-flex;
+    align-items: center;
+    font-family: $font-mono;
+    font-size: clamp(.6rem, .72vw, .72rem);
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--muted-color);
+    padding: .2rem .6rem;
+    border: 1px solid var(--card-border);
+    border-radius: $radius-capsule;
+    line-height: 1.5;
+    user-select: none;
+}
+
+/* ================================================
+   Service Icon
+================================================ */
+
+.service-icon {
+    @include flex(row, center, center);
+    width: clamp(40px, 4vw, 52px);
+    height: clamp(40px, 4vw, 52px);
+    border-radius: $radius-small;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    flex-shrink: 0;
+    transition: border-color 0.3s ease;
+
+    svg {
+        width: clamp(20px, 2.2vw, 26px);
+        height: clamp(20px, 2.2vw, 26px);
+        color: var(--accent);
+        flex-shrink: 0;
+    }
+
+    /* Large icon for the wide card */
+    &--lg {
+        width: clamp(72px, 8vw, 110px);
+        height: clamp(72px, 8vw, 110px);
+        border-radius: $radius-default;
+
+        svg {
+            width: clamp(32px, 4vw, 52px);
+            height: clamp(32px, 4vw, 52px);
+        }
+    }
+}
+
+.gridBx:hover .service-icon {
+    border-color: var(--card-border-hover);
+}
+
+/* ================================================
+   Service Title & Description
+================================================ */
+
+.service-title {
+    font-family: $font-display;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.service-desc {
+    font-family: $font-sans;
+    font-size: clamp(.8rem, .9vw, .95rem);
+    color: var(--muted-color);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ================================================
+   Service Tags
+================================================ */
+
+.service-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-top: auto;
+    /* Push tags to card bottom */
+
+    li {
+        font-family: $font-mono;
+        font-size: clamp(.6rem, .7vw, .7rem);
+        color: var(--muted-color);
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: $radius-capsule;
+        padding: .2rem .65rem;
+        white-space: nowrap;
+        transition: color 0.25s ease, border-color 0.25s ease;
+    }
+}
+
+.gridBx:hover .service-tags li {
+    border-color: var(--card-border-hover);
+    color: var(--text-color);
+}
+
+/* ================================================
+   Intro Box Typography
+================================================ */
+
+.section-eyebrow {
+    font-family: $font-mono;
+    font-size: clamp(.65rem, .85vw, .8rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--accent);
+    margin: 0;
+}
+
+.section-heading {
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 3vw, 2.75rem);
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.15;
+    margin: 0;
+}
+
+.section-sub {
+    font-family: $font-sans;
+    font-size: clamp(.8rem, .95vw, 1rem);
+    color: var(--muted-color);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 42ch;
+}
+
+.intro-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    color: var(--text-color);
+    font-family: $font-sans;
+    font-size: clamp(.8rem, .95vw, .95rem);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: .15rem;
+    margin-top: auto;
+    /* Push CTA to card bottom */
+    transition: color 0.25s ease, border-color 0.25s ease;
+
+    svg {
+        flex-shrink: 0;
+        transition: transform 0.25s ease;
+    }
+
+    &:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+
+        svg {
+            transform: translate(3px, -3px);
+        }
+    }
+}
+
+/* ================================================
+   Wide Card Inner Layout (Box 5)
+================================================ */
+
+.wide-content {
+    flex: 1;
+    @include flex(column, start, start);
+    gap: clamp(.6rem, .85vw, .875rem);
+    min-width: 0;
+    /* Prevent flex overflow on small screens */
+
+    .service-tags {
+        margin-top: 0;
+    }
+}
+
+/* ================================================
+   Responsive — Tablet (769px – 1024px)
+================================================ */
+
+@media (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "two   two"
+            "one   three"
+            "one   four"
+            "five  five";
+    }
+}
+
+/* ================================================
+   Responsive — Mobile (≤ 640px)
+================================================ */
+
+@media (max-width: 640px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        grid-template-areas:
+            "two"
+            "one"
+            "three"
+            "four"
+            "five";
+    }
+
+    .gridBx--wide {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .service-icon--lg {
+            width: 56px;
+            height: 56px;
+
+            svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+
+    /* On mobile, tags don't need to be pushed down */
+    .service-tags {
+        margin-top: .25rem;
+    }
+
+    .intro-cta {
+        margin-top: .5rem;
+    }
+}
+
+/* ================================================
+   Responsive — Small mobile (≤ 380px)
+================================================ */
+
+@media (max-width: 380px) {
+    .services {
+        padding-inline: 16px;
+    }
+
+    .section-heading {
+        font-size: 1.35rem;
+    }
+
+    .service-title {
+        font-size: 1.05rem;
+    }
 
     .gridBx {
-        padding: 5rem;
-        border: 1px solid $text-color;
-        background: color.adjust($foreground, $alpha: -0.9, $lightness: 70%);
-        backdrop-filter: blur(8px);
-        border-radius: $radius-default;
-        @include flex(column, center, center);
+        padding: 1rem;
+    }
+}
 
-        &:nth-child(1) {
-            grid-area: one;
-        }
+/* ================================================
+   4K+ screens (≥ 2000px)
+================================================ */
 
-        &:nth-child(2) {
-            grid-area: two;
-        }
+@media (min-width: 2000px) {
+    .services {
+        max-width: 1800px;
+    }
 
-        &:nth-child(3) {
-            grid-area: three;
-        }
+    .grid-container {
+        gap: 2rem;
+        grid-template-rows: repeat(3, minmax(380px, auto));
+    }
 
-        &:nth-child(4) {
-            grid-area: four;
-        }
+    .section-heading {
+        font-size: clamp(2.75rem, 2.5vw, 3.5rem);
+    }
 
-        &:nth-child(5) {
-            grid-area: five;
-        }
+    .service-title {
+        font-size: clamp(1.5rem, 1.5vw, 2rem);
+    }
+
+    .service-desc {
+        font-size: clamp(.95rem, .85vw, 1.1rem);
+    }
+
+    .service-tags li {
+        font-size: clamp(.7rem, .6vw, .85rem);
+        padding: .3rem .85rem;
     }
 }
