@@ -128,8 +128,9 @@ nav {
     z-index: 2;
 
     @media (min-width: 768px) {
-        display: block;
-        /* Visible on desktop */
+        display: flex;
+        align-items: center;
+        gap: .75rem;
     }
 }
 

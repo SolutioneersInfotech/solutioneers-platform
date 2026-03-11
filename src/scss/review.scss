@@ -1,0 +1,141 @@
+@use './font.module' as *;
+@use './mixin.module' as *;
+@use './theme.module' as *;
+
+.reviews {
+    margin-block: 5rem;
+    width: 100%;
+    position: relative;
+    @include container(1300px);
+}
+
+.reviews-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+/* Control animation duration */
+
+.marquee-duration {
+    --duration: 20s;
+}
+
+/* =========================
+   Review Card
+========================= */
+
+.review-card {
+    position: relative;
+    width: 16rem;
+    height: 100%;
+    cursor: pointer;
+
+    border-radius: 12px;
+    padding: 1rem;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(6px);
+
+    transition: background .25s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+}
+
+.review-user {
+    display: flex;
+    flex-direction: column;
+
+    figcaption {
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    p {
+        font-size: 0.75rem;
+        opacity: 0.6;
+    }
+}
+
+blockquote {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* =========================
+   Edge Gradients
+========================= */
+
+.fade-left,
+.fade-right {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+}
+
+.fade-left {
+    left: 0;
+    background: linear-gradient(to right, $foreground, transparent);
+}
+
+.fade-right {
+    right: 0;
+    background: linear-gradient(to left, $foreground, transparent);
+}
+
+/* =========================
+   Responsive Marquee
+========================= */
+
+/* Mobile → vertical marquee */
+
+@media (max-width: 640px) {
+
+    .marquee {
+        flex-direction: column !important;
+    }
+
+    .marquee-track {
+        flex-direction: column !important;
+    }
+
+    .review-card {
+        width: 100%;
+    }
+
+}
+
+/* Tablet + Desktop → horizontal */
+
+@media (min-width: 641px) {
+
+    .marquee {
+        flex-direction: row;
+    }
+
+    .marquee-track {
+        flex-direction: row;
+    }
+
+}

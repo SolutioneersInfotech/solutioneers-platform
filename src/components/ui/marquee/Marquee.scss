@@ -1,0 +1,70 @@
+:root {
+    --gap: 1rem;
+    --duration: 20s;
+
+    --animate-marquee: marquee var(--duration) linear infinite;
+    --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+}
+
+
+.marquee {
+    display: flex;
+    overflow: hidden;
+    gap: var(--gap);
+    padding: 0.5rem;
+    width: 100%;
+
+    &.horizontal {
+        flex-direction: row;
+    }
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    &.pause-on-hover:hover .marquee-track {
+        animation-play-state: paused;
+    }
+}
+
+
+.marquee-track {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-around;
+    gap: var(--gap);
+
+    &.horizontal {
+        flex-direction: row;
+        animation: var(--animate-marquee);
+    }
+
+    &.vertical {
+        flex-direction: column;
+        animation: var(--animate-marquee-vertical);
+    }
+
+    &.reverse {
+        animation-direction: reverse;
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
+@keyframes marquee-vertical {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(calc(-100% - var(--gap)));
+    }
+}

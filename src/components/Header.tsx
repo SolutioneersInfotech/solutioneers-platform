@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from './ui/button/button';
+import ThemeToggle from './ui/ThemeToggle';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function Header() {
         </nav>
 
         <div className="cta">
+          <ThemeToggle />
           <Button href="/#contact">Get in Touch</Button>
         </div>
 

@@ -2,8 +2,60 @@
 @use '../scss/mixin.module' as *;
 @use '../scss/header.scss' as *;
 @use './page.module.scss';
+@use '../scss/service.scss';
+@use '../scss/review.scss';
 @use '../scss/contact.scss';
 @use '../scss/footer.scss';
+
+/* =============================
+   Theme CSS Custom Properties
+   ============================= */
+
+[data-theme="dark"],
+:root {
+    --foreground: #0d1034;
+    --background: #00010f;
+    --accent: #1a2078;
+    --tint: #030c35;
+    --text-color: #ffffff;
+    --muted-color: #5b6c84;
+    --footer-bg: #000015;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-border-hover: rgba(255, 255, 255, 0.25);
+    --glass-bg: rgba(102, 102, 102, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --nav-bg: rgba(0, 0, 0, 0.3);
+    --fade-gradient-color: #0d1034;
+    --hr-color: #ffffff;
+    --dotted-mail-bg: #0d1a3f;
+    --dotted-mail-hover-bg: #ffffff;
+    --dotted-mail-hover-color: #000015;
+    --service-card-bg: rgba(90, 100, 180, 0.1);
+}
+
+[data-theme="light"] {
+    --foreground: #e8eaf6;
+    --background: #f5f6fa;
+    --accent: #3f51b5;
+    --tint: #dde1f0;
+    --text-color: #1a1a2e;
+    --muted-color: #6b7280;
+    --footer-bg: #e8eaf6;
+    --card-bg: rgba(0, 0, 0, 0.03);
+    --card-border: rgba(0, 0, 0, 0.1);
+    --card-border-hover: rgba(0, 0, 0, 0.2);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --nav-bg: rgba(255, 255, 255, 0.5);
+    --fade-gradient-color: #e8eaf6;
+    --hr-color: #c5cae9;
+    --dotted-mail-bg: #dde1f0;
+    --dotted-mail-hover-bg: #3f51b5;
+    --dotted-mail-hover-color: #ffffff;
+    --service-card-bg: rgba(63, 81, 181, 0.08);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +66,8 @@ html,
 body {
     height: 100%;
     width: 100%;
-    color: $text-color;
+    color: var(--text-color);
+    transition: color 0.3s ease, background 0.3s ease;
 }
 
 /* Fixed background layer */
@@ -25,11 +78,11 @@ body {
     overflow: hidden;
 
     background: conic-gradient(from 180deg,
-            $background,
-            $foreground,
-            $background,
-            $foreground,
-            $background );
+            var(--background),
+            var(--foreground),
+            var(--background),
+            var(--foreground),
+            var(--background));
 }
 
 /* Scrollable layer */
@@ -51,4 +104,197 @@ body {
 main {
     @include container;
     flex: 1;
+}
+
+/* =============================
+   Theme Overrides
+   ============================= */
+
+/* Header overrides */
+.header .contentBx::before {
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+}
+
+.header .logo {
+    color: var(--text-color);
+}
+
+.header nav {
+    background: var(--nav-bg);
+    border-color: var(--glass-border);
+
+    @media (min-width: 768px) {
+        background: transparent;
+        border: none;
+    }
+
+    ul li a {
+        color: var(--text-color);
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
+}
+
+.header .mobile-menu-toggle .bar {
+    background-color: var(--text-color);
+}
+
+/* Footer overrides */
+.footer {
+    background: var(--footer-bg);
+    color: var(--text-color);
+    border-color: var(--card-border-hover);
+
+    [data-theme="light"] & {
+        border-bottom-color: var(--footer-bg);
+    }
+}
+
+.footer .upperSection .contactInfo span {
+    color: var(--text-color);
+}
+
+.footer .upperSection .contactInfo .dotted-mail {
+    background: var(--dotted-mail-bg);
+    color: var(--text-color);
+    border-color: var(--text-color);
+
+    &:hover {
+        background: var(--dotted-mail-hover-bg);
+        color: var(--dotted-mail-hover-color);
+    }
+}
+
+.footer .footer-links .quick-links ul li a,
+.footer .footer-links .informations ul li a {
+    color: var(--text-color);
+
+    &:hover {
+        color: var(--accent);
+    }
+}
+
+.footer hr {
+    border-color: var(--hr-color);
+}
+
+.footer .lowerSection .socialLinks li a {
+    color: var(--text-color);
+
+    &:hover {
+        color: var(--accent);
+    }
+}
+
+/* Service overrides */
+.grid-container .gridBx {
+    border-color: var(--text-color);
+    background: var(--service-card-bg);
+}
+
+/* Review overrides */
+.review-card {
+    border-color: var(--card-border);
+    background: var(--card-bg);
+
+    &:hover {
+        background: var(--card-border);
+    }
+}
+
+.fade-left {
+    background: linear-gradient(to right, var(--fade-gradient-color), transparent) !important;
+}
+
+.fade-right {
+    background: linear-gradient(to left, var(--fade-gradient-color), transparent) !important;
+}
+
+/* Contact overrides */
+.left-info {
+    color: var(--text-color);
+
+    p {
+        color: var(--muted-color);
+    }
+}
+
+.contact-info {
+    color: var(--text-color);
+}
+
+.contact-info .contact-item {
+    border-color: var(--card-border);
+    background: var(--card-bg);
+
+    &:hover {
+        border-color: var(--card-border-hover);
+    }
+
+    a {
+        color: var(--text-color);
+    }
+}
+
+.right-form {
+    border-color: var(--card-border);
+    background: var(--card-bg);
+
+    h3 {
+        color: var(--text-color);
+    }
+
+    p {
+        color: var(--muted-color);
+    }
+}
+
+/* Button overrides */
+.button-wrapper {
+    background: var(--accent);
+}
+
+.button {
+    color: var(--text-color);
+
+    [data-theme="light"] & {
+        color: #ffffff;
+    }
+}
+
+/* =============================
+   Theme Toggle Button
+   ============================= */
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    flex-shrink: 0;
+
+    &:hover {
+        background: var(--card-border);
+        border-color: var(--card-border-hover);
+        transform: scale(1.1);
+    }
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: rotate(15deg);
+    }
 }

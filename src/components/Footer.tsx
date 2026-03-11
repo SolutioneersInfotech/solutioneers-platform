@@ -3,6 +3,7 @@ import React from 'react'
 import { FaFacebookF } from 'react-icons/fa'
 import { FaInstagram, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6'
 import { Button } from './ui/button/button'
+import ThemeToggle from './ui/ThemeToggle'
 
 export default function Footer() {
   return (
@@ -41,6 +42,7 @@ export default function Footer() {
       <div className="lowerSection">
         <p>Copyright © {new Date().getFullYear()} Solutioneers Infotech Pvt. Ltd. All rights reserved.</p>
         <ul className="socialLinks">
+          <li><ThemeToggle /></li>
           <li><Link href="https://www.facebook.com/solutioneers" target="_blank" rel="noopener noreferrer"><FaFacebookF /></Link></li>
           <li><Link href="https://www.linkedin.com/company/solutioneers" target="_blank" rel="noopener noreferrer"><FaLinkedinIn /></Link></li>
           <li><Link href="https://www.instagram.com/solutioneers/" target="_blank" rel="noopener noreferrer"><FaInstagram /></Link></li>
