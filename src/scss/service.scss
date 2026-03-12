@@ -1,320 +1,399 @@
-@use './theme.module' as *;
-@use './mixin.module' as *;
 @use './font.module' as *;
+@use './mixin.module' as *;
+@use './theme.module' as *;
 
-/* ================================================
+
+/* ============================================================
    Services Section
-================================================ */
+   ============================================================ */
 
 .services {
     @include container(1300px);
     margin-block: clamp(3rem, 6vw, 7rem);
 }
 
-/* ================================================
-   Bento Grid
-================================================ */
 
-.grid-container {
+/* ============================================================
+   Bento Grid
+   ============================================================ */
+
+.gridContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, minmax(clamp(180px, 20vw, 300px), auto));
     grid-template-areas:
-        "one two  two"
-        "one three four"
-        "five five four";
-    gap: clamp(.875rem, 1.25vw, 1.25rem);
+        "one   two   two"
+        "one   three four"
+        "five  five  four";
+    gap: clamp(0.875rem, 1.25vw, 1.25rem);
 }
 
-/* ================================================
-   Base Card
-================================================ */
+.one {
+    grid-area: one;
+}
+
+.two {
+    grid-area: two;
+}
+
+.three {
+    grid-area: three;
+}
+
+.four {
+    grid-area: four;
+}
+
+.five {
+    grid-area: five;
+}
+
+
+/* ============================================================
+   Base Card  (motion.div with layoutId)
+   NOTE: Framer Motion drives positional animation via layoutId.
+   Avoid CSS `transition` on transform/position — it conflicts.
+   ============================================================ */
 
 .gridBx {
     position: relative;
     padding: clamp(1.25rem, 2vw, 2rem);
-    border: 1px solid var(--card-border);
-    background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: $radius-default;
+    border-radius: clamp(14px, 1.5vw, 18px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
     overflow: hidden;
-    @include flex(column, start, start);
-    gap: clamp(.65rem, .9vw, .9rem);
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 0.85vw, 0.9rem);
+    cursor: pointer;
 
-    &:hover {
-        border-color: var(--card-border-hover);
-        transform: translateY(-3px);
-    }
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 4px 20px rgba(0, 0, 0, 0.2);
 
-    &:nth-child(1) {
-        grid-area: one;
-    }
-
-    &:nth-child(2) {
-        grid-area: two;
-    }
-
-    &:nth-child(3) {
-        grid-area: three;
-    }
-
-    &:nth-child(4) {
-        grid-area: four;
-    }
-
-    &:nth-child(5) {
-        grid-area: five;
-    }
-}
-
-/* ================================================
-   Card Variants
-================================================ */
-
-/* Featured — Box 1 (Web Dev, tall left) */
-.gridBx--featured {
-    border-color: var(--card-border-hover);
-
-    /* Top accent line */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--accent);
-        opacity: 0.75;
-        border-radius: $radius-default $radius-default 0 0;
-        z-index: 1;
-    }
-
-    /* Radial glow from top-left */
+    /* Radial glow from --accent var (set inline in TSX) */
     &::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at top left, var(--accent), transparent 65%);
-        opacity: 0.07;
+        background: radial-gradient(ellipse at top left,
+                var(--accent),
+                transparent 65%);
+        opacity: 0;
         pointer-events: none;
         border-radius: inherit;
+        transition: opacity 0.4s ease;
     }
 
-    >* {
-        position: relative;
-        z-index: 1;
-    }
-}
+    /* Safe to transition box-shadow and border-color — framer ignores these */
+    transition: border-color 0.3s ease,
+    box-shadow 0.3s ease;
 
-/* Intro — Box 2 (section header, wide top) */
-.gridBx--intro {
-    gap: clamp(.6rem, .85vw, .85rem);
-    justify-content: flex-start;
-}
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.14);
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 8px 36px rgba(0, 0, 0, 0.35);
 
-/* Wide — Box 5 (UI/UX, wide bottom) */
-.gridBx--wide {
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(1.25rem, 2.5vw, 2.5rem);
-}
+        &::after {
+            opacity: 0.2;
+        }
 
-/* ================================================
-   Service Number Badge
-================================================ */
-
-.service-number {
-    display: inline-flex;
-    align-items: center;
-    font-family: $font-mono;
-    font-size: clamp(.6rem, .72vw, .72rem);
-    font-weight: 600;
-    letter-spacing: .12em;
-    color: var(--muted-color);
-    padding: .2rem .6rem;
-    border: 1px solid var(--card-border);
-    border-radius: $radius-capsule;
-    line-height: 1.5;
-    user-select: none;
-}
-
-/* ================================================
-   Service Icon
-================================================ */
-
-.service-icon {
-    @include flex(row, center, center);
-    width: clamp(40px, 4vw, 52px);
-    height: clamp(40px, 4vw, 52px);
-    border-radius: $radius-small;
-    border: 1px solid var(--card-border);
-    background: var(--card-bg);
-    flex-shrink: 0;
-    transition: border-color 0.3s ease;
-
-    svg {
-        width: clamp(20px, 2.2vw, 26px);
-        height: clamp(20px, 2.2vw, 26px);
-        color: var(--accent);
-        flex-shrink: 0;
-    }
-
-    /* Large icon for the wide card */
-    &--lg {
-        width: clamp(72px, 8vw, 110px);
-        height: clamp(72px, 8vw, 110px);
-        border-radius: $radius-default;
-
-        svg {
-            width: clamp(32px, 4vw, 52px);
-            height: clamp(32px, 4vw, 52px);
+        .serviceTags li {
+            border-color: rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
         }
     }
 }
 
-.gridBx:hover .service-icon {
-    border-color: var(--card-border-hover);
+
+/* ============================================================
+   Card — Number badge
+   ============================================================ */
+
+.serviceNumber {
+    font-family: $font-mono;
+    font-size: clamp(0.58rem, 0.72vw, 0.7rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    width: fit-content;
+    user-select: none;
 }
 
-/* ================================================
-   Service Title & Description
-================================================ */
 
-.service-title {
+/* ============================================================
+   Card — Title & tagline
+   ============================================================ */
+
+.serviceTitle {
     font-family: $font-display;
-    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
     font-weight: 700;
-    color: var(--text-color);
     line-height: 1.2;
+    color: var(--text-color);
     margin: 0;
 }
 
-.service-desc {
+.serviceDesc {
     font-family: $font-sans;
-    font-size: clamp(.8rem, .9vw, .95rem);
-    color: var(--muted-color);
+    font-size: clamp(0.78rem, 0.9vw, 0.95rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+}
+
+
+/* ============================================================
+   Card — Tags  (desktop pill list, hidden on mobile)
+   ============================================================ */
+
+.serviceTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: auto;
+    list-style: none;
+    padding: 0;
+
+    li {
+        font-family: $font-mono;
+        font-size: clamp(0.58rem, 0.68vw, 0.68rem);
+        color: rgba(255, 255, 255, 0.32);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        padding: 0.2rem 0.65rem;
+        white-space: nowrap;
+        transition:
+            color 0.25s ease,
+            border-color 0.25s ease;
+    }
+}
+
+
+/* ============================================================
+   Mobile inline services
+   .mobileServices > .mobileSvc > .mobileSvcName + .mobileSvcDesc
+   Hidden on desktop, shown ≤ 640px
+   ============================================================ */
+
+.mobileServices {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+/* Left border uses --accent var from parent .gridBx */
+.mobileSvc {
+    padding: 0.7rem 0.9rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border-left: 2px solid var(--accent);
+}
+
+.mobileSvcName {
+    font-family: $font-sans;
+    font-size: clamp(0.8rem, 2.5vw, 0.88rem);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.2rem;
+}
+
+.mobileSvcDesc {
+    font-family: $font-sans;
+    font-size: clamp(0.68rem, 2vw, 0.74rem);
+    color: rgba(255, 255, 255, 0.38);
+    line-height: 1.55;
+}
+
+
+/* ============================================================
+   Backdrop  (motion.div — opacity animated by framer)
+   ============================================================ */
+
+.servicesBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(4, 6, 14, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    /* opacity: initial → animate → exit  handled entirely by framer */
+}
+
+
+/* ============================================================
+   Expanded modal  (motion.div with layoutId — same id as card)
+
+   Framer morphs the card into this via layoutId.
+   We declare the final resting styles only.
+   border-top is set inline in TSX:  style={{ borderTop: `3px solid ${active.accent}` }}
+   ============================================================ */
+
+.servicesExpanded {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    /* centres the fixed block */
+    z-index: 100;
+
+    width: min(720px, 90vw);
+    height: fit-content;
+    max-height: min(600px, 88svh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 99px;
+    }
+
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border-radius: clamp(16px, 2vw, 22px);
+
+    /* border-top color comes from TSX inline style */
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: linear-gradient(145deg,
+        rgba(16, 20, 34, 0.99),
+        rgba(8, 10, 18, 0.99));
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.75),
+    0 8px 32px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.9rem, 1.2vw, 1.25rem);
+}
+
+
+/* ============================================================
+   Close button  (.servicesCloseBtn)
+   ============================================================ */
+
+.servicesCloseBtn {
+    position: absolute;
+    top: clamp(12px, 1.5vw, 16px);
+    right: clamp(12px, 1.5vw, 16px);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    flex-shrink: 0;
+    z-index: 2;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.13);
+        color: rgba(255, 255, 255, 0.9);
+    }
+}
+
+
+/* ============================================================
+   Expanded modal — title & tagline
+   (.expandedTitle  .expandedTagline)
+   ============================================================ */
+
+.expandedTitle {
+    font-family: $font-display;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-color);
+    margin: 0;
+    padding-right: 2.5rem;
+    /* clear the close button */
+}
+
+.expandedTagline {
+    font-family: $font-sans;
+    font-size: clamp(0.8rem, 0.95vw, 0.95rem);
+    color: rgba(255, 255, 255, 0.42);
     line-height: 1.65;
     margin: 0;
 }
 
-/* ================================================
-   Service Tags
-================================================ */
 
-.service-tags {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: .4rem;
-    margin-top: auto;
-    /* Push tags to card bottom */
+/* ============================================================
+   Expanded services grid
+   (.expandedServices > .serviceItem  — each is motion.div with variants)
+   Do NOT add CSS opacity/transform transitions — framer owns those.
+   ============================================================ */
 
-    li {
-        font-family: $font-mono;
-        font-size: clamp(.6rem, .7vw, .7rem);
-        color: var(--muted-color);
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        border-radius: $radius-capsule;
-        padding: .2rem .65rem;
-        white-space: nowrap;
-        transition: color 0.25s ease, border-color 0.25s ease;
+.expandedServices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 28%, 240px), 1fr));
+    gap: clamp(0.6rem, 1vw, 0.85rem);
+}
+
+.serviceItem {
+    padding: clamp(0.85rem, 1.2vw, 1.1rem);
+    border-radius: clamp(10px, 1vw, 13px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    /* No CSS transition on opacity/transform — framer variants handle entry */
+
+    h4 {
+        font-family: $font-display;
+        font-size: clamp(0.85rem, 1vw, 1rem);
+        font-weight: 700;
+        color: var(--text-color);
+        margin: 0 0 0.35rem;
+        line-height: 1.3;
     }
-}
 
-.gridBx:hover .service-tags li {
-    border-color: var(--card-border-hover);
-    color: var(--text-color);
-}
-
-/* ================================================
-   Intro Box Typography
-================================================ */
-
-.section-eyebrow {
-    font-family: $font-mono;
-    font-size: clamp(.65rem, .85vw, .8rem);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .15em;
-    color: var(--accent);
-    margin: 0;
-}
-
-.section-heading {
-    font-family: $font-display;
-    font-size: clamp(1.5rem, 3vw, 2.75rem);
-    font-weight: 700;
-    color: var(--text-color);
-    line-height: 1.15;
-    margin: 0;
-}
-
-.section-sub {
-    font-family: $font-sans;
-    font-size: clamp(.8rem, .95vw, 1rem);
-    color: var(--muted-color);
-    line-height: 1.6;
-    margin: 0;
-    max-width: 42ch;
-}
-
-.intro-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    color: var(--text-color);
-    font-family: $font-sans;
-    font-size: clamp(.8rem, .95vw, .95rem);
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: .15rem;
-    margin-top: auto;
-    /* Push CTA to card bottom */
-    transition: color 0.25s ease, border-color 0.25s ease;
-
-    svg {
-        flex-shrink: 0;
-        transition: transform 0.25s ease;
+    p {
+        font-family: $font-sans;
+        font-size: clamp(0.72rem, 0.82vw, 0.82rem);
+        color: rgba(255, 255, 255, 0.4);
+        line-height: 1.6;
+        margin: 0;
     }
+
+    transition: background 0.2s ease,
+    border-color 0.2s ease;
 
     &:hover {
-        color: var(--accent);
-        border-color: var(--accent);
-
-        svg {
-            transform: translate(3px, -3px);
-        }
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.14);
     }
 }
 
-/* ================================================
-   Wide Card Inner Layout (Box 5)
-================================================ */
 
-.wide-content {
-    flex: 1;
-    @include flex(column, start, start);
-    gap: clamp(.6rem, .85vw, .875rem);
-    min-width: 0;
-    /* Prevent flex overflow on small screens */
-
-    .service-tags {
-        margin-top: 0;
-    }
-}
-
-/* ================================================
-   Responsive — Tablet (769px – 1024px)
-================================================ */
+/* ============================================================
+   Responsive — Tablet  769px – 1024px
+   ============================================================ */
 
 @media (max-width: 1024px) {
-    .grid-container {
+    .gridContainer {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         grid-template-areas:
@@ -325,97 +404,162 @@
     }
 }
 
-/* ================================================
-   Responsive — Mobile (≤ 640px)
-================================================ */
+
+/* ============================================================
+   Responsive — Mobile  ≤ 640px
+   ============================================================ */
 
 @media (max-width: 640px) {
-    .grid-container {
+    .gridContainer {
         grid-template-columns: 1fr;
-        grid-auto-rows: auto;
+        grid-template-rows: auto;
         grid-template-areas:
-            "two"
             "one"
+            "two"
             "three"
             "four"
             "five";
     }
 
-    .gridBx--wide {
-        flex-direction: column;
-        align-items: flex-start;
+    .gridBx {
+        cursor: default;
 
-        .service-icon--lg {
-            width: 56px;
-            height: 56px;
-
-            svg {
-                width: 28px;
-                height: 28px;
-            }
+        &:hover::after {
+            opacity: 0;
         }
     }
 
-    /* On mobile, tags don't need to be pushed down */
-    .service-tags {
-        margin-top: .25rem;
+    .serviceTags {
+        display: none;
     }
 
-    .intro-cta {
-        margin-top: .5rem;
+    .mobileServices {
+        display: flex;
+    }
+
+    .servicesExpanded {
+        width: 94vw;
+        max-height: 90svh;
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .expandedServices {
+        grid-template-columns: 1fr;
     }
 }
 
-/* ================================================
-   Responsive — Small mobile (≤ 380px)
-================================================ */
+
+/* ============================================================
+   Responsive — Small mobile  ≤ 380px
+   ============================================================ */
 
 @media (max-width: 380px) {
     .services {
-        padding-inline: 16px;
-    }
-
-    .section-heading {
-        font-size: 1.35rem;
-    }
-
-    .service-title {
-        font-size: 1.05rem;
+        padding-inline: 1rem;
     }
 
     .gridBx {
         padding: 1rem;
+        gap: 0.6rem;
+    }
+
+    .serviceTitle {
+        font-size: 1rem;
+    }
+
+    .expandedTitle {
+        font-size: 1.2rem;
     }
 }
 
-/* ================================================
-   4K+ screens (≥ 2000px)
-================================================ */
+
+/* ============================================================
+   Responsive — 4K+  ≥ 2000px
+   ============================================================ */
 
 @media (min-width: 2000px) {
     .services {
         max-width: 1800px;
     }
 
-    .grid-container {
-        gap: 2rem;
-        grid-template-rows: repeat(3, minmax(380px, auto));
+    .gridContainer {
+        gap: 1.75rem;
+        grid-template-rows: repeat(3, minmax(360px, auto));
     }
 
-    .section-heading {
-        font-size: clamp(2.75rem, 2.5vw, 3.5rem);
+    .gridBx {
+        padding: 2.5rem;
     }
 
-    .service-title {
-        font-size: clamp(1.5rem, 1.5vw, 2rem);
+    .serviceTitle {
+        font-size: clamp(1.5rem, 1.4vw, 2rem);
     }
 
-    .service-desc {
-        font-size: clamp(.95rem, .85vw, 1.1rem);
+    .serviceDesc {
+        font-size: clamp(0.95rem, 0.8vw, 1.05rem);
     }
 
-    .service-tags li {
-        font-size: clamp(.7rem, .6vw, .85rem);
-        padding: .3rem .85rem;
+    .serviceTags li {
+        font-size: clamp(0.68rem, 0.55vw, 0.8rem);
+        padding: 0.28rem 0.8rem;
     }
+
+    .servicesExpanded {
+        width: min(900px, 70vw);
+        max-height: min(700px, 80svh);
+    }
+
+    .expandedServices {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.1rem;
+    }
+
+    .serviceItem {
+        padding: 1.4rem;
+    }
+
+    .expandedTitle {
+        font-size: clamp(1.8rem, 2vw, 2.4rem);
+    }
+}
+
+.cursorFollower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    translate: -50% -50%;
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, .15);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: .7rem;
+    font-weight: 600;
+
+    pointer-events: none;
+
+    z-index: 200;
+
+    color: #fff;
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+@media(max-width:640px) {
+
+    .cursorFollower {
+        display: none;
+    }
+
 }
