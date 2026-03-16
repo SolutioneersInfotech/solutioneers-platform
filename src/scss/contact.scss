@@ -5,11 +5,11 @@
 
 .contact {
     margin-block: clamp(3rem, 6vw, 6rem);
-    @include container(1300px);
+    @include container();
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: "left right";
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas: "left left right right right";
     gap: clamp(1.5rem, 3vw, 3rem);
 
     font-family: $font-sans;

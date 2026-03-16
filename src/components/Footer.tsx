@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="upperSection">
         <div className="contactInfo">
           <div>
-            <h4>Solutioneers Info.</h4>
+            <h4>Solutioneers Infotech.</h4>
             <h1>Let&apos;s discuss your vision. With us</h1>
           </div>
           <Button href='/#contact'>Schedule a call now →</Button>

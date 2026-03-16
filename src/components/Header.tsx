@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header className="header">
       <div className="contentBx">
-        <Link href="/" className="logo">Solutioneers Info.</Link>
+        <Link href="/" className="logo">Solutioneers</Link>
 
         {/* Nav is back inside! Toggles the 'open' class based on state */}
         <nav className={isMenuOpen ? 'open' : ''}>

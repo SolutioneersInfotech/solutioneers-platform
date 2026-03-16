@@ -8,7 +8,7 @@
    ============================================================ */
 
 .services {
-    @include container(1300px);
+    @include container;
     margin-block: clamp(3rem, 6vw, 7rem);
 }
 

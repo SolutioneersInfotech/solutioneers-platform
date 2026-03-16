@@ -1,0 +1,10 @@
+@use './font.module' as *;
+@use './mixin.module' as *;
+@use './theme.module' as *;
+@use 'sass:color';
+
+.work{
+    @include container(1300px);
+    @include flex(column, center, center);
+    min-height: 100svh;
+}

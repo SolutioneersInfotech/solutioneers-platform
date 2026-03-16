@@ -1,0 +1,93 @@
+@use '../../../scss/mixin.module' as *;
+
+.stackedCardsContainer {
+    position: relative;
+    width: 100%;
+}
+
+.stackedCardWrapper {
+    width: 100%;
+    position: sticky;
+    height: 50vh;
+    // top:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    perspective: 1100px;
+}
+
+.stackedCard {
+    width: 80%;
+    height: 250px;
+
+    display: flex;
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    transform-style: preserve-3d;
+    transform-origin: top center;
+
+    backdrop-filter: blur(24px);
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35);
+
+    will-change: transform;
+
+}
+
+.stackedCardImage {
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(to top, #000000a9, #ffffffa9 75%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    @include flex(row ,center, center);
+    font-size: clamp(3rem, 10vw, 10rem);
+}
+
+
+.stackedCardContent {
+    width: 58%;
+    padding: 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stackedCardContent h3 {
+    font-size: 32px;
+    margin-bottom: 14px;
+}
+
+.stackedCardContent p {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+
+    .stackedCard {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .stackedCardImage {
+        width: 100%;
+        height: 220px;
+    }
+
+    .stackedCardContent {
+        width: 100%;
+        padding: 28px;
+    }
+
+}
