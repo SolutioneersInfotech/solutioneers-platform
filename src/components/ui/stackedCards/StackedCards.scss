@@ -1,4 +1,50 @@
 @use '../../../scss/mixin.module' as *;
+@use '../../../scss/theme.module' as *;
+
+/* Theme-aware color variables */
+:root {
+    --card-accent-light: rgba(26, 32, 120, 0.12);
+    --card-accent-darker: rgba(13, 16, 52, 0.08);
+    --card-border-primary: rgba(91, 108, 132, 0.2);
+    --card-border-hover: rgba(91, 108, 132, 0.35);
+    --card-shadow-sm: rgba(0, 0, 0, 0.2);
+    --card-shadow-lg: rgba(26, 32, 120, 0.15);
+    --card-shadow-hover: rgba(26, 32, 120, 0.25);
+    --card-image-bg-primary: rgba(26, 32, 120, 0.25);
+    --card-image-bg-secondary: rgba(13, 16, 52, 0.15);
+    --card-image-border: rgba(91, 108, 132, 0.15);
+    --card-overlay-1: rgba(91, 108, 132, 0.1);
+    --card-overlay-2: rgba(91, 108, 132, 0);
+    --card-overlay-3: rgba(26, 32, 120, 0.1);
+    --card-text-primary: #ffffff;
+    --card-text-secondary: rgba(255, 255, 255, 0.85);
+    --card-accent-bar: rgba(91, 108, 132, 0.3);
+    --card-accent-bar-fade: rgba(91, 108, 132, 0.1);
+    --card-inset-light: rgba(255, 255, 255, 0.08);
+    --card-inset-hover: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] {
+    --card-accent-light: rgba(63, 81, 181, 0.08);
+    --card-accent-darker: rgba(100, 110, 180, 0.05);
+    --card-border-primary: rgba(63, 81, 181, 0.15);
+    --card-border-hover: rgba(63, 81, 181, 0.3);
+    --card-shadow-sm: rgba(0, 0, 0, 0.08);
+    --card-shadow-lg: rgba(63, 81, 181, 0.1);
+    --card-shadow-hover: rgba(63, 81, 181, 0.15);
+    --card-image-bg-primary: rgba(63, 81, 181, 0.12);
+    --card-image-bg-secondary: rgba(100, 110, 180, 0.08);
+    --card-image-border: rgba(63, 81, 181, 0.1);
+    --card-overlay-1: rgba(63, 81, 181, 0.08);
+    --card-overlay-2: rgba(63, 81, 181, 0);
+    --card-overlay-3: rgba(63, 81, 181, 0.08);
+    --card-text-primary: #1a1a2e;
+    --card-text-secondary: rgba(26, 26, 46, 0.8);
+    --card-accent-bar: rgba(63, 81, 181, 0.25);
+    --card-accent-bar-fade: rgba(63, 81, 181, 0.08);
+    --card-inset-light: rgba(0, 0, 0, 0.02);
+    --card-inset-hover: rgba(0, 0, 0, 0.05);
+}
 
 .stackedCardsContainer {
     position: relative;
@@ -9,85 +55,141 @@
     width: 100%;
     position: sticky;
     height: 50vh;
-    // top:50%;
     display: flex;
     justify-content: center;
     align-items: center;
-
     perspective: 1100px;
 }
 
 .stackedCard {
     width: 80%;
     height: 250px;
-
     display: flex;
     overflow: hidden;
-
-    border-radius: 20px;
-
+    border-radius: 24px;
     transform-style: preserve-3d;
     transform-origin: top center;
 
+    /* Enhanced glassmorphism backdrop with theme support */
     backdrop-filter: blur(24px);
-    background: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg,
+            var(--card-accent-light) 0%,
+            var(--card-accent-darker) 100%);
 
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--card-border-primary);
 
+    /* Enhanced shadow with color tint */
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.35);
+        0 8px 24px var(--card-shadow-sm),
+        0 30px 80px var(--card-shadow-lg),
+        inset 0 1px 0 var(--card-inset-light);
 
     will-change: transform;
+    transition: box-shadow 0.4s ease-out, border-color 0.4s ease-out;
 
+    &:hover {
+        box-shadow:
+            0 12px 32px var(--card-shadow-sm),
+            0 40px 100px var(--card-shadow-hover),
+            inset 0 1px 0 var(--card-inset-hover);
+        border-color: var(--card-border-hover);
+    }
 }
 
 .stackedCardImage {
     width: 25%;
     height: 100%;
-    background: linear-gradient(to top, #000000a9, #ffffffa9 75%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    @include flex(row ,center, center);
+    background: linear-gradient(135deg,
+            var(--card-image-bg-primary) 0%,
+            var(--card-image-bg-secondary) 100%);
+    border-right: 1px solid var(--card-image-border);
+    @include flex(row, center, center);
     font-size: clamp(3rem, 10vw, 10rem);
-}
+    font-weight: 700;
+    position: relative;
+    color: var(--card-text-primary);
+    opacity: 0.9;
 
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(45deg,
+                var(--card-overlay-1) 0%,
+                var(--card-overlay-2) 50%,
+                var(--card-overlay-3) 100%);
+        pointer-events: none;
+    }
+}
 
 .stackedCardContent {
     width: 58%;
     padding: 48px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 16px;
 }
 
 .stackedCardContent h3 {
-    font-size: 32px;
-    margin-bottom: 14px;
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--card-text-primary);
+    margin: 0;
+    letter-spacing: -0.5px;
+    transition: color 0.3s ease;
 }
 
 .stackedCardContent p {
-    font-size: 16px;
-    line-height: 1.6;
-    opacity: 0.9;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.7;
+    color: var(--card-text-secondary);
+    margin: 0;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+/* Small accent bar at the top of cards */
+.stackedCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+            var(--card-accent-bar) 0%,
+            var(--card-accent-bar-fade) 50%,
+            transparent 100%);
 }
 
 @media (max-width: 768px) {
-
     .stackedCard {
         flex-direction: column;
         height: auto;
+        border-radius: 20px;
     }
 
     .stackedCardImage {
         width: 100%;
-        height: 220px;
+        height: 180px;
+        border-right: none;
+        border-bottom: 1px solid var(--card-image-border);
+        font-size: clamp(2rem, 8vw, 5rem);
     }
 
     .stackedCardContent {
         width: 100%;
-        padding: 28px;
+        padding: 32px 24px;
+        gap: 12px;
     }
 
+    .stackedCardContent h3 {
+        font-size: clamp(20px, 2.2vw, 26px);
+    }
+
+    .stackedCardContent p {
+        font-size: clamp(13px, 1.1vw, 15px);
+    }
 }

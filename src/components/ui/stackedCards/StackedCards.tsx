@@ -107,6 +107,13 @@ function StackedCard({
         [0, index * 3]
     )
 
+    /* smooth opacity fade for better visual hierarchy */
+    const opacity = useTransform(
+        scrollYProgress,
+        [0, 0.3, 1],
+        [0.7, 1, 1]
+    )
+
     return (
         <div
             ref={ref}
@@ -122,11 +129,12 @@ function StackedCard({
                     y,
                     rotateZ,
                     rotateX,
+                    opacity,
                     zIndex: total - index
                 }}
             >
                 <div className="stackedCardImage">
-                    {index + 1}.
+                    {String(index + 1).padStart(2, '0')}
                 </div>
 
                 <div className="stackedCardContent">
