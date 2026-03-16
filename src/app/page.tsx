@@ -1,3 +1,4 @@
+import About from '@/components/About'
 import Contact from '@/components/Contact'
 import ReviewSection from '@/components/Reviews'
 import Services from '@/components/Services'
@@ -7,6 +8,7 @@ import React from 'react'
 export default function page() {
   return (
     <>
+      <About />
       <Page />
       <Services />
       <ReviewSection />
