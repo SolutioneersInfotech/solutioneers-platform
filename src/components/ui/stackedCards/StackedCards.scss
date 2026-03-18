@@ -1,5 +1,6 @@
 @use '../../../scss/mixin.module' as *;
 @use '../../../scss/theme.module' as *;
+@use '../../../scss/font.module' as *;
 
 /* Theme-aware color variables */
 :root {
@@ -109,7 +110,7 @@
     position: relative;
     color: var(--card-text-primary);
     opacity: 0.9;
-
+    font-family: $font-display;
     &::before {
         content: '';
         position: absolute;
@@ -135,6 +136,7 @@
     font-size: clamp(24px, 2.5vw, 32px);
     font-weight: 700;
     line-height: 1.2;
+    font-family: $font-display;
     color: var(--card-text-primary);
     margin: 0;
     letter-spacing: -0.5px;
@@ -146,6 +148,7 @@
     line-height: 1.7;
     color: var(--card-text-secondary);
     margin: 0;
+    font-family: $font-sans;
     letter-spacing: 0.3px;
     transition: color 0.3s ease;
 }

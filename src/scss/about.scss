@@ -1,346 +1,46 @@
 @use './mixin.module' as *;
 @use './theme.module' as *;
+@use './font.module' as *;
 
-/* Theme-aware colors */
-:root {
-    --about-text-primary: #ffffff;
-    --about-text-secondary: rgba(255, 255, 255, 0.75);
-    --about-accent: #1a2078;
-    --about-card-bg: rgba(255, 255, 255, 0.04);
-    --about-card-border: rgba(91, 108, 132, 0.15);
-    --about-shadow: rgba(26, 32, 120, 0.2);
+.about-wrapper {
+    @include container();
+    @include flex(column, center, center);
 }
-
-[data-theme="light"] {
-    --about-text-primary: #1a1a2e;
-    --about-text-secondary: rgba(26, 26, 46, 0.8);
-    --about-accent: #3f51b5;
-    --about-card-bg: rgba(63, 81, 181, 0.04);
-    --about-card-border: rgba(63, 81, 181, 0.12);
-    --about-shadow: rgba(63, 81, 181, 0.1);
-}
-
 .about {
+    @include flex(row, center, center);
+    padding: clamp(1rem, 5vw, 3rem);
+    gap: 1rem;
+    background: #ffffff14;
+    border-radius: $radius-medium;
+    backdrop-filter: blur(10px);
+    text-align: justify;
+    border: 2px solid #ffffff14;
+    @media (max-width: 768px) {
+        @include flex(column, center, center);
+    }
+}
+.right, .left{
+    width: 50%;
+}
+.right p{
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    font-family: $font-sans;
+}
+.bottom{
+    margin-block: 6rem;
     width: 100%;
-    color: var(--about-text-primary);
-    perspective: 1200px;
-}
-
-/* ==================== Hero Section ==================== */
-.about-hero {
-    @include container(1200px);
-    min-height: 70svh;
-    @include flex(column, center, center);
-    text-align: center;
-    position: relative;
-    padding: clamp(80px, 10vh, 120px) 0;
-    gap: clamp(24px, 3vh, 40px);
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: min(100%, 700px);
-        height: 400px;
-        background: radial-gradient(ellipse 100% 100% at 50% 0%,
-                rgba(26, 32, 120, 0.08) 0%,
-                transparent 70%);
-        pointer-events: none;
-        z-index: -1;
-    }
-
-    h1 {
-        font-size: clamp(48px, 7vw, 76px);
-        font-weight: 700;
-        line-height: 1.1;
-        margin: 0;
-        color: var(--about-text-primary);
-        max-width: 900px;
-        letter-spacing: -1px;
-    }
-
-    .hero-subtitle {
-        font-size: clamp(18px, 2.2vw, 28px);
-        font-weight: 600;
-        line-height: 1.4;
-        color: var(--about-accent);
-        max-width: 800px;
-        margin: 0;
-    }
-
-    .hero-description {
-        font-size: clamp(14px, 1.5vw, 18px);
-        line-height: 1.8;
-        color: var(--about-text-secondary);
-        max-width: 700px;
-        margin: 0;
-    }
-}
-
-/* ==================== Stats Section ==================== */
-.about-stats-wrapper {
-    @include container(1200px);
-    padding: clamp(100px, 12vh, 160px) 0;
-    position: relative;
-    z-index: 1;
-}
-
-.about-stats {
-    width: 100%;
-}
-
-.stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 22vw, 240px), 1fr));
-    gap: clamp(24px, 3vw, 40px);
-    perspective: 1200px;
-}
-
-.stat-item {
-    @include flex(column, center, center);
-    gap: clamp(12px, 2vh, 20px);
-    padding: clamp(32px, 4vw, 48px);
-    background: linear-gradient(135deg,
-            var(--about-card-bg) 0%,
-            rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid var(--about-card-border);
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    transform-style: preserve-3d;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    cursor: pointer;
-
-    &:hover {
-        border-color: var(--about-accent);
-        transform: translateY(-8px);
-        box-shadow:
-            0 20px 40px var(--about-shadow),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .stat-icon {
-        font-size: clamp(36px, 5vw, 52px);
-        line-height: 1;
-    }
-
-    .stat-value {
-        font-size: clamp(32px, 5vw, 48px);
-        font-weight: 700;
-        color: var(--about-accent);
-        line-height: 1;
-        letter-spacing: -1px;
-    }
-
-    .stat-label {
-        font-size: clamp(12px, 1.1vw, 15px);
-        color: var(--about-text-secondary);
-        text-align: center;
-        line-height: 1.4;
-        font-weight: 500;
-    }
-}
-
-/* ==================== Mission & Vision Cards ==================== */
-.about-mission-vision {
-    @include container(1200px);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 45vw, 500px), 1fr));
-    gap: clamp(32px, 4vw, 48px);
-    padding: clamp(100px, 12vh, 160px) 0;
-    position: relative;
-    z-index: 1;
-}
-
-.card {
-    position: relative;
-    background: linear-gradient(135deg,
-            var(--about-card-bg) 0%,
-            rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid var(--about-card-border);
-    border-radius: 20px;
-    padding: clamp(40px, 5vw, 56px);
-    backdrop-filter: blur(12px);
-    transition: all 0.4s ease-out;
-    overflow: hidden;
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg,
-                var(--about-accent) 0%,
-                transparent 100%);
-    }
-
-    .card-header {
-        margin-bottom: clamp(20px, 2.5vh, 32px);
-        position: relative;
-
-        h3 {
-            font-size: clamp(24px, 3vw, 32px);
-            font-weight: 700;
-            margin: 0 0 clamp(8px, 1vh, 12px) 0;
-            color: var(--about-text-primary);
-        }
-
-        .accent-line {
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: var(--about-accent);
-            border-radius: 2px;
-        }
-    }
-
-    p {
-        font-size: clamp(14px, 1.3vw, 17px);
-        line-height: 1.8;
-        color: var(--about-text-secondary);
-        margin: 0 0 clamp(16px, 2vh, 24px) 0;
-    }
-
-    .card-highlight {
-        display: inline-block;
-        padding: clamp(8px, 1vw, 12px) clamp(16px, 2vw, 24px);
-        background: var(--about-accent);
-        color: white;
-        border-radius: 8px;
-        font-size: clamp(12px, 1vw, 14px);
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-}
-
-/* ==================== Core Values Section ==================== */
-.about-values {
-    @include container(1200px);
-    padding: clamp(100px, 12vh, 160px) 0;
-    position: relative;
-    z-index: 1;
-
-    h2 {
-        text-align: center;
-        font-size: clamp(32px, 4.5vw, 56px);
-        font-weight: 700;
-        margin: 0 0 clamp(60px, 8vh, 80px) 0;
-        color: var(--about-text-primary);
-    }
-}
-
-.values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 30vw, 360px), 1fr));
-    gap: clamp(28px, 3.5vw, 40px);
-}
-
-.value-item {
-    @include flex(column, center, center);
-    gap: clamp(16px, 2vh, 24px);
-    padding: clamp(36px, 4vw, 48px);
-    background: linear-gradient(135deg,
-            var(--about-card-bg) 0%,
-            rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid var(--about-card-border);
-    border-radius: 16px;
-    backdrop-filter: blur(12px);
-    text-align: center;
-    transition: all 0.4s ease-out;
-    cursor: pointer;
-
-    &:hover {
-        border-color: var(--about-accent);
-        box-shadow: 0 20px 40px var(--about-shadow);
-    }
-
-    .value-icon {
-        font-size: clamp(40px, 6vw, 64px);
-        line-height: 1;
-        display: block;
-        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    h4 {
-        font-size: clamp(18px, 2.2vw, 26px);
-        font-weight: 700;
-        margin: 0;
-        color: var(--about-text-primary);
-    }
-
-    p {
-        font-size: clamp(13px, 1.2vw, 16px);
-        line-height: 1.6;
-        color: var(--about-text-secondary);
-        margin: 0;
-    }
-}
-
-/* ==================== Responsive Design ==================== */
-@media (max-width: 768px) {
-    .about-hero {
-        min-height: auto;
-        padding: clamp(60px, 6vh, 80px) 0;
-
-        &::before {
-            height: 250px;
-        }
-    }
-
-    .about-stats-wrapper {
-        padding: clamp(60px, 6vh, 80px) 0;
-    }
-
-    .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    @media (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
-        gap: clamp(16px, 2vh, 24px);
-    }
-
-    .stat-item {
-        padding: clamp(24px, 3vw, 32px);
-    }
-
-    .about-mission-vision {
-        grid-template-columns: 1fr;
-        gap: clamp(20px, 3vh, 32px);
-        padding: clamp(60px, 6vh, 80px) 0;
-    }
-
-    .card {
-        padding: clamp(32px, 4vw, 40px);
-    }
-
-    .about-values {
-        padding: clamp(60px, 6vh, 80px) 0;
-
-        h2 {
-            margin-bottom: clamp(40px, 5vh, 60px);
-        }
-    }
-
-    .values-grid {
-        grid-template-columns: 1fr;
-        gap: clamp(20px, 3vh, 28px);
-    }
-
-    .about-cta {
-        padding: clamp(60px, 6vh, 80px);
-
-        h2 {
-            font-size: clamp(28px, 4vw, 44px);
-        }
     }
 }
-
-@media (max-width: 480px) {
-    .about-mission-vision {
-        gap: clamp(16px, 2vh, 24px);
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
+.cards{
+    width: 250px;
+    height: 250px;
+    background: #ffffff14;
+    border-radius: $radius-medium;
+    backdrop-filter: blur(10px);
+    border: 2px solid #ffffff14;
 }

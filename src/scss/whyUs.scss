@@ -33,17 +33,8 @@
         transform: translateX(-50%);
         width: min(100%, 900px);
         height: 400px;
-        background: radial-gradient(ellipse 100% 100% at 50% 0%,
-                rgba(26, 32, 120, 0.08) 0%,
-                transparent 70%);
         pointer-events: none;
         z-index: 0;
-
-        [data-theme="light"] & {
-            background: radial-gradient(ellipse 100% 100% at 50% 0%,
-                    rgba(63, 81, 181, 0.06) 0%,
-                    transparent 70%);
-        }
     }
 
     >* {
@@ -67,7 +58,7 @@
         margin-bottom: 16px;
         letter-spacing: -1px;
         transition: color 0.3s ease;
-
+        font-family: $font-display;
         background: linear-gradient(135deg,
                 var(--work-accent-color) 0%,
                 var(--work-header-text) 100%);
@@ -87,7 +78,7 @@
         line-height: 1.6;
         letter-spacing: 0.5px;
         transition: color 0.3s ease;
-
+        font-family: $font-sans;
         @media (max-width: 768px) {
             font-size: clamp(14px, 1.2vw, 16px);
         }
