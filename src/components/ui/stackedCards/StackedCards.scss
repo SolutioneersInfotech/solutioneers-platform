@@ -4,7 +4,7 @@
 
 /* Theme-aware color variables */
 :root {
-    --card-accent-light: rgba(26, 32, 120, 0.12);
+    --card-accent-light: rgba(26, 32, 120, 0.2);
     --card-accent-darker: rgba(13, 16, 52, 0.08);
     --card-border-primary: rgba(91, 108, 132, 0.2);
     --card-border-hover: rgba(91, 108, 132, 0.35);
@@ -72,7 +72,7 @@
     transform-origin: top center;
 
     /* Enhanced glassmorphism backdrop with theme support */
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(50px);
     background: linear-gradient(135deg,
             var(--card-accent-light) 0%,
             var(--card-accent-darker) 100%);

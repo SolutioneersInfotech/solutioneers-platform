@@ -1,5 +1,5 @@
+
 import React from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
 import "./Select.scss";
 
 type SelectOption = {
@@ -8,37 +8,43 @@ type SelectOption = {
     props?: React.OptionHTMLAttributes<HTMLOptionElement>;
 };
 
-interface SelectProps {
-    options: SelectOption[];
-    name: string;
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+    options?: SelectOption[];
     label: string;
     error?: string;
-    register?: UseFormRegisterReturn;
 }
 
 export default function Select({
     label,
     options,
-    name,
     error,
-    register,
+    id,
+    name,
+    children,
+    ...selectProps
 }: SelectProps): React.JSX.Element {
+    const fieldId = id || name;
+
     return (
         <div className="inputBx">
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={fieldId}>{label}</label>
 
             <select
                 className="select"
-                id={name}
-                defaultValue={options[0].value}
-                {...register}   // React Hook Form props injected here
+                id={fieldId}
+                {...selectProps}
             >
-                {options.map((option) => (
-                    <option key={option.value} value={option.value} {...option.props}>
+                {options?.map((option, index) => (
+                    <option
+                        key={option.value || index}
+                        value={option.value}
+                    >
                         {option.label}
                     </option>
                 ))}
+                {children}
             </select>
+
             {error && <p className="input-error">{error}</p>}
         </div>
     );

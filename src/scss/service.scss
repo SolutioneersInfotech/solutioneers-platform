@@ -9,6 +9,7 @@
 
 .services {
     @include container;
+    @include flex(column, center, center);
     margin-block: clamp(3rem, 6vw, 7rem);
 }
 

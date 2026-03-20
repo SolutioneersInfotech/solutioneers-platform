@@ -30,7 +30,7 @@ const cards = [
 export default function Page() {
     return (
         <section className="work">
-            <div className="work-header">
+            <div className="titleHeader">
                 <h2>Why Choose Us</h2>
                 <p>Engineered for excellence, built for your success</p>
             </div>

@@ -1,0 +1,82 @@
+@use './mixin.module' as *;
+@use './theme.module' as *;
+@use './font.module' as *;
+
+.hero {
+    position: relative;
+    min-height: 80svh;
+    @include flex(column, center, center);
+    position: relative;
+    margin-block: clamp(2rem, 5vw, 4rem);
+    perspective: 1200px;
+    @include flex(column, center, center);
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+.badgeWrapper {
+    margin: 0 auto;
+}
+
+.badge {
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(20, 20, 30, 0.6);
+    padding: 0.4rem 1rem;
+    backdrop-filter: blur(12px);
+}
+
+.shinyText {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.heading {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 2rem 0 1rem;
+    font-family: $font-display;
+    background: linear-gradient(to bottom right, #fff, rgba(255, 255, 255, 0.4));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtext {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    font-family: $font-sans;
+    margin-bottom: 2rem;
+}
+
+.imageWrapper {
+    position: relative;
+    margin-top: 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        border-radius: inherit;
+    }
+}
+
+.imageGlow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255, 189, 122, 0.4), transparent 60%);
+    filter: blur(120px);
+    opacity: 0.5;
+}
+
+.break {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .break {
+        display: block;
+    }
+}

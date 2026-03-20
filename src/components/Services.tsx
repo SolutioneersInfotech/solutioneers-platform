@@ -33,7 +33,10 @@ export default function Services() {
             onMouseMove={handleMouseMove}
             id="services"
         >
-
+            <div className="titleHeader">
+                <h2>Services</h2>
+                <p>Delivering technology that solves real business problems</p>
+            </div>
             {/* Cursor follower */}
 
             <AnimatePresence>

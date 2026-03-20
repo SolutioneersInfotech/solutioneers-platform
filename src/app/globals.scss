@@ -71,6 +71,12 @@ body {
     width: 100%;
     color: var(--text-color);
     transition: color 0.3s ease, background 0.3s ease;
+    background: conic-gradient(from 180deg,
+            var(--background),
+            var(--foreground),
+            var(--background),
+            var(--foreground),
+            var(--background));
 }
 
 /* Fixed background layer */
@@ -94,12 +100,18 @@ body {
     position: absolute;
     inset: 0;
     overflow-y: auto;
-    overflow-x: hidden;
+    // overflow-x: hidden;
 
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
+    background: conic-gradient(from 180deg,
+            var(--background),
+            var(--foreground),
+            var(--background),
+            var(--foreground),
+            var(--background));
 }
 
 /* Page content */

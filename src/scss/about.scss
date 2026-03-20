@@ -21,26 +21,45 @@
 }
 .right, .left{
     width: 50%;
+    @media(max-width: 768px) {
+        width: 100%;
+    }
 }
 .right p{
     font-size: clamp(0.9rem, 2vw, 1.2rem);
     font-family: $font-sans;
 }
 .bottom{
-    margin-block: 6rem;
+    margin-block: 2rem;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     justify-items: center;
+    gap: 2rem;
     @media (max-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 }
 .cards{
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    padding: clamp(1rem, 5vw, 3rem);
     background: #ffffff14;
     border-radius: $radius-medium;
     backdrop-filter: blur(10px);
     border: 2px solid #ffffff14;
+    transition: all 0.3s ease;
+    h1{
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        font-family: $font-display;
+        margin-bottom: 1rem;
+    }
+    p{
+        font-size: clamp(0.9rem, 2vw, 1.2rem);
+        font-family: $font-sans;
+    }
+    &:hover{
+        transform: scale(1.01);
+        box-shadow: 5px 5px 15px #ffffff14;
+    }
 }

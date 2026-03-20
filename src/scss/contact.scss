@@ -6,26 +6,29 @@
 .contact {
     margin-block: clamp(3rem, 6vw, 6rem);
     @include container();
+    @include flex(column, center, center);
 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-areas: "left left right right right";
-    gap: clamp(1.5rem, 3vw, 3rem);
+    .contactContent {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas: "left left right right right";
+        gap: clamp(1.5rem, 3vw, 3rem);
 
-    font-family: $font-sans;
+        font-family: $font-sans;
 
-    /* Tablet */
-    @media (max-width: 1024px) {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
+        /* Tablet */
+        @media (max-width: 1024px) {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
 
-    /* Mobile */
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "left"
-            "right";
+        /* Mobile */
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "left"
+                "right";
+        }
     }
 }
 
@@ -96,6 +99,7 @@
             rotate: 45deg;
 
             transition: rotate .5s ease;
+
             @media (max-width: 425px) {
                 display: none;
             }

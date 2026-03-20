@@ -2,13 +2,6 @@
 
 import AnimatedTestimonials from "@/components/ui/testimonials/Testimonials"
 
-interface Review {
-    name: string
-    username: string
-    body: string
-    img: string
-}
-
 const testimonials = [
     {
         name: "John",
@@ -32,16 +25,13 @@ const testimonials = [
 
 export default function ReviewSection() {
 
-    // const testimonials = testimonial.map((review) => ({
-    //     name: review.name,
-    //     username: review.username,
-    //     body: review.body,
-    //     img: review.img
-    // }))
 
     return (
         <section className="reviews">
-
+            <div className="titleHeader">
+                <h2>Testimonials</h2>
+                <p>Real stories from businesses we’ve empowered</p>
+            </div>
             <div className="reviews-container">
 
                 <AnimatedTestimonials
