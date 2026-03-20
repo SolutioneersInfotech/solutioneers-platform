@@ -39,6 +39,12 @@ const contactSchema = new mongoose.Schema(
 			enum: ["new", "responded", "archived"],
 			default: "new",
 		},
+		source: {
+			type: String,
+			enum: ["website", "email", "phone", "other"],
+			default: "website",
+			trim: true,
+		},
 		createdAt: {
 			type: Date,
 			default: Date.now,

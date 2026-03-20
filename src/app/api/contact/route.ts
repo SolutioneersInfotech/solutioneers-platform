@@ -41,6 +41,7 @@ export async function POST(request: NextRequest) {
 			service,
 			budget,
 			message: message.trim(),
+			source: 'Website'
 		});
 
 		// Send emails

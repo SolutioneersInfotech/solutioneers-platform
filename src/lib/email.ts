@@ -16,8 +16,8 @@ export async function sendContactEmail({ name, email, company, service, budget, 
 	try {
 		// Send email to admin
 		const adminResponse = await resend.emails.send({
-			from: "Contact Form <onboarding@resend.dev>",
-			to: process.env.ADMIN_EMAIL || "info@solutioneers.in",
+			from: "NO-REPLY <no-reply@solutioneers.in>",
+			to: process.env.ADMIN_EMAIL || "connect@solutioneers.in",
 			subject: `New Contact Form Submission from ${name}`,
 			react: ContactEmail({
 				name,
@@ -33,7 +33,7 @@ export async function sendContactEmail({ name, email, company, service, budget, 
 		}
 		// Send confirmation email to user
 		const userResponse = await resend.emails.send({
-			from: "Solutioneers <onboarding@resend.dev>",
+			from: "NO-REPLY <no-reply@solutioneers.in>",
 			to: email,
 			subject: "We received your message - Solutioneers",
 			html: `
