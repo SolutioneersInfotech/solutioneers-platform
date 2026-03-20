@@ -21,26 +21,14 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// Validate email format
-		const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-		if (!emailRegex.test(email)) {
-			return NextResponse.json(
-				{
-					success: false,
-					error: "Invalid email format",
-				},
-				{ status: 400 },
-			);
-		}
-
 		// Create contact document in database
 		const contact = await Contact.create({
-			name: name.trim(),
-			email: email.trim(),
-			company: company?.trim() || "",
+			name,
+			email,
+			company,
 			service,
 			budget,
-			message: message.trim(),
+			message,
 		});
 
 		// Send emails
