@@ -40,7 +40,7 @@
     @include flex(column, start, center);
     gap: clamp(1rem, 2vw, 1.5rem);
 
-    color: $text-color;
+    color: var(--text-color);
     text-transform: capitalize;
 
     h1 {
@@ -50,7 +50,7 @@
 
     p {
         font-size: clamp(.9rem, 1vw, 1rem);
-        color: $muted-color;
+        color: var(--muted-color);
         max-width: 500px;
     }
 }
@@ -61,24 +61,24 @@
     @include flex(column, start, center);
     gap: clamp(1rem, 2vw, 1.5rem);
     width: 100%;
-    color: $text-color;
+    color: var(--text-color);
 
     .contact-item {
         width: 100%;
         @include flex(row, center, start);
 
-        border: 1px solid rgba(#fff, .1);
+        border: 1px solid var(--contact-item-border);
         padding: clamp(.75rem, 1vw, 1rem);
         border-radius: $radius-medium;
 
         backdrop-filter: blur(8px);
-        background: rgba(#fff, .05);
+        background: var(--contact-item-bg);
 
         transition: all .3s ease;
 
         &:hover {
             transform: scale(1.02);
-            border-color: rgba(#fff, .25);
+            border-color: var(--contact-item-border-hover);
         }
 
         /* Mobile improvement */
@@ -92,8 +92,8 @@
             padding: .5rem;
             border-radius: $radius-full;
 
-            color: color.adjust($muted-color, $lightness: 40%);
-            border: 1px solid rgba(#fff, .25);
+            color: var(--muted-color);
+            border: 1px solid var(--contact-svg-border);
 
             font-size: clamp(1.75rem, 2vw, 2.25rem);
             rotate: 45deg;
@@ -112,10 +112,10 @@
         &:nth-child(1) a .card-icon,
         &:nth-child(2) a .card-icon,
         &:nth-child(3) a .card-icon {
-            background: color.scale($accent, $lightness: -20%);
+            background: var(--accent-darker);
 
             svg {
-                color: color.adjust($accent, $lightness: 50%);
+                color: var(--accent-lighter);
             }
         }
     }
@@ -126,7 +126,7 @@
 
         width: 100%;
         text-decoration: none;
-        color: $text-color;
+        color: var(--text-color);
 
         font-size: clamp(.65rem, .9vw, .9rem);
 
@@ -134,18 +134,18 @@
             @include flex(row, center, center);
 
             padding: .5rem;
-            border: 1px solid rgba(#fff, .25);
+            border: 1px solid var(--contact-card-icon-border);
             border-radius: $radius-small;
 
             font-size: clamp(1rem, 1.2vw, 1.25rem);
 
             svg {
-                color: $text-color;
+                color: var(--text-color);
             }
         }
 
         div p {
-            color: color.adjust($text-color, $lightness: -20%);
+            color: var(--contact-text-p);
         }
     }
 }
@@ -157,11 +157,11 @@
 
     height: 100%;
 
-    border: 1px solid rgba(#fff, .1);
+    border: 1px solid var(--contact-item-border);
     border-radius: $radius-medium;
 
     backdrop-filter: blur(8px);
-    background: rgba(#fff, .05);
+    background: var(--contact-item-bg);
 
     padding: clamp(1rem, 2vw, 2rem);
 
@@ -170,11 +170,11 @@
 
     h3 {
         font-size: clamp(1.25rem, 2vw, 1.5rem);
-        color: $text-color;
+        color: var(--text-color);
     }
 
     p {
-        color: $muted-color;
+        color: var(--muted-color);
         font-size: clamp(.85rem, 1vw, 1rem);
     }
 

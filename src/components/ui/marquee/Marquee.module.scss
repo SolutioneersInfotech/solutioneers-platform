@@ -1,0 +1,91 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Marquee Component — SCSS Module
+// Supports: horizontal, vertical, reverse, pauseOnHover
+// Responsive: 320px → 4K
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Variables ─────────────────────────────────────────────────────────────────
+:root {
+  --marquee-duration: 40s;
+  --marquee-gap: 1rem;
+}
+
+// ── Keyframes ─────────────────────────────────────────────────────────────────
+@keyframes marquee-horizontal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--marquee-gap)));
+  }
+}
+
+// ── Container ─────────────────────────────────────────────────────────────────
+.marquee {
+  display: flex;
+  overflow: hidden;
+  padding: 0.5rem;
+  gap: var(--marquee-gap);
+  position: relative;
+
+  // Respect user motion preferences
+  @media (prefers-reduced-motion: reduce) {
+    overflow: auto;
+    flex-wrap: wrap;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+// ── Track (each repeated slice) ───────────────────────────────────────────────
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-around;
+  gap: var(--marquee-gap);
+
+  // Horizontal animation
+  &--horizontal {
+    flex-direction: row;
+    animation: marquee-horizontal var(--marquee-duration) linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  // Vertical animation
+  &--vertical {
+    flex-direction: column;
+    animation: marquee-vertical var(--marquee-duration) linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  // Reverse direction
+  &--reverse {
+    animation-direction: reverse;
+  }
+
+  // Pause on hover — targets the container's :hover state
+  .marquee:hover &--pause-on-hover {
+    animation-play-state: paused;
+  }
+}

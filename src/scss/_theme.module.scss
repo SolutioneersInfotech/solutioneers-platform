@@ -1,11 +1,11 @@
-$foreground: #0d1034;
-$background: #00010f;
-$accent: #1a2078;
-$tint: #030c35;
-$text-color: #ffffff;
-$body-color: $tint;
-$muted-color: #5b6c84;
-$bg: $background;
+$foreground: var(--foreground, #0d1034);
+$background: var(--background, #00010f);
+$accent: var(--accent, #1a2078);
+$tint: var(--tint, #030c35);
+$text-color: var(--text-color, #ffffff);
+$body-color: var(--tint, #030c35);
+$muted-color: var(--muted-color, #5b6c84);
+$bg: var(--background, #00010f);
 
 /* Input variables */
 $input-radius: 8px;

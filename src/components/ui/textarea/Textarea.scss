@@ -9,28 +9,28 @@
     gap: 5px;
     label {
         font-size: .85rem;
-        color: $text-color;
+        color: var(--text-color);
     }
 
     textarea {
         padding: .5rem;
         border-radius: $radius-small;
-        border: 1px solid rgba($color: #fff, $alpha: .1);
+        border: 1px solid var(--card-border);
         background: transparent;
         backdrop-filter: blur(8px);
         width: 100%;
         outline: none;
-        color: $input-text;
+        color: var(--text-color);
         font-size: .85rem;
         resize: vertical;
 
         &::placeholder {
-            color: color.adjust($input-placeholder, $lightness: 20%);
+            color: var(--placeholder-lighter);
         }
     }
 
     .input-error {
-        color: $input-border-error;
+        color: #ff4d4f;
         font-size: .75rem;
         margin-top: .25rem;
     }

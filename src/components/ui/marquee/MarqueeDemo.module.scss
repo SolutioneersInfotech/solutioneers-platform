@@ -1,0 +1,99 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// MarqueeDemo — SCSS Module
+// ─────────────────────────────────────────────────────────────────────────────
+
+.marquee-demo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  gap: 0.5rem;
+
+  // ── Responsive gaps ──────────────────────────────────────────────────────────
+
+  @media (max-width: 479px) {
+    gap: 0.375rem;
+  }
+
+  @media (min-width: 1920px) {
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 2560px) {
+    gap: 1rem;
+  }
+
+  // ── Each marquee row ─────────────────────────────────────────────────────────
+
+  &__row {
+    width: 100%;
+    padding: 0.25rem 0;
+  }
+
+  // ── Fade overlays ────────────────────────────────────────────────────────────
+
+  &__fade {
+    position: absolute;
+    inset-block: 0; // top: 0; bottom: 0
+    width: 25%;
+    pointer-events: none;
+    z-index: 10;
+
+    // Tiny phones — smaller fade to show more content
+    @media (max-width: 479px) {
+      width: 12%;
+    }
+
+    // Small phones
+    @media (min-width: 480px) and (max-width: 639px) {
+      width: 15%;
+    }
+
+    // Tablets
+    @media (min-width: 640px) and (max-width: 1023px) {
+      width: 20%;
+    }
+
+    // 2K+
+    @media (min-width: 1920px) {
+      width: 20%;
+    }
+
+    &--left {
+      left: 0;
+      background: linear-gradient(
+        to right,
+        var(--marquee-bg, #ffffff),
+        transparent
+      );
+
+      @media (prefers-color-scheme: dark) {
+        background: linear-gradient(
+          to right,
+          var(--marquee-bg-dark, #09090b),
+          transparent
+        );
+      }
+    }
+
+    &--right {
+      right: 0;
+      background: linear-gradient(
+        to left,
+        var(--marquee-bg, #ffffff),
+        transparent
+      );
+
+      @media (prefers-color-scheme: dark) {
+        background: linear-gradient(
+          to left,
+          var(--marquee-bg-dark, #09090b),
+          transparent
+        );
+      }
+    }
+  }
+}

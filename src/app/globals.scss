@@ -19,9 +19,12 @@
     --foreground: #0d1034;
     --background: #00010f;
     --accent: #1a2078;
+    --accent-darker: #151a60;
+    --accent-lighter: #7b85f2;
     --tint: #030c35;
     --text-color: #ffffff;
     --muted-color: #5b6c84;
+    --placeholder-lighter: #8c9eb9;
     --footer-bg: #000015;
     --card-bg: rgba(255, 255, 255, 0.05);
     --card-border: rgba(255, 255, 255, 0.1);
@@ -34,16 +37,69 @@
     --dotted-mail-bg: #0d1a3f;
     --dotted-mail-hover-bg: #ffffff;
     --dotted-mail-hover-color: #000015;
-    --service-card-bg: rgba(90, 100, 180, 0.1);
+    --service-card-bg: rgba(255, 255, 255, 0.03);
+    --service-card-border: rgba(255, 255, 255, 0.07);
+    --service-card-border-hover: rgba(255, 255, 255, 0.14);
+    --service-card-inset-shadow: rgba(255, 255, 255, 0.05);
+    --service-card-shadow: rgba(0, 0, 0, 0.2);
+    --service-number-color: rgba(255, 255, 255, 0.3);
+    --service-number-border: rgba(255, 255, 255, 0.08);
+    --service-desc-color: rgba(255, 255, 255, 0.45);
+    --service-tag-color: rgba(255, 255, 255, 0.32);
+    --service-tag-border: rgba(255, 255, 255, 0.08);
+    --service-expanded-bg-1: rgba(16, 20, 34, 0.99);
+    --service-expanded-bg-2: rgba(8, 10, 18, 0.99);
+    --service-expanded-border: rgba(255, 255, 255, 0.08);
+    --service-close-bg: rgba(255, 255, 255, 0.06);
+    --service-close-color: rgba(255, 255, 255, 0.5);
+    --service-close-hover-bg: rgba(255, 255, 255, 0.13);
+    --service-close-hover-color: rgba(255, 255, 255, 0.9);
+    --service-item-bg: rgba(255, 255, 255, 0.03);
+    --service-item-border: rgba(255, 255, 255, 0.07);
+    --service-item-hover-bg: rgba(255, 255, 255, 0.06);
+    --service-item-hover-border: rgba(255, 255, 255, 0.14);
+    --service-item-p: rgba(255, 255, 255, 0.4);
+    --service-cursor-follower-bg: rgba(255, 255, 255, .06);
+    --service-cursor-follower-border: rgba(255, 255, 255, .15);
+    --service-cursor-follower-text: #ffffff;
+    
+    /* Hero Section */
+    --hero-heading-gradient-start: #ffffff;
+    --hero-heading-gradient-end: rgba(255, 255, 255, 0.4);
+    --hero-subtext-color: rgba(255, 255, 255, 0.6);
+    --hero-badge-bg: rgba(20, 20, 30, 0.6);
+    --hero-badge-border: rgba(255, 255, 255, 0.1);
+    --hero-badge-text: rgba(255, 255, 255, 0.7);
+    --hero-image-glow: radial-gradient(circle, rgba(255, 189, 122, 0.4), transparent 60%);
+    
+    /* Title Header */
+    --title-header-text: #ffffff;
+    --title-header-accent: rgba(255, 255, 255, 0.7);
+
+    /* Why Us / Work Section */
+    --work-header-text: #ffffff;
+    --work-header-accent: rgba(255, 255, 255, 0.7);
+    --work-accent-color: #1a2078;
+
+    /* Contact Section */
+    --contact-item-border: rgba(255, 255, 255, 0.1);
+    --contact-item-bg: rgba(255, 255, 255, 0.05);
+    --contact-item-border-hover: rgba(255, 255, 255, 0.25);
+    --contact-svg-border: rgba(255, 255, 255, 0.25);
+    --contact-card-icon-border: rgba(255, 255, 255, 0.25);
+    --contact-text-p: rgba(255, 255, 255, 0.8);
 }
 
 [data-theme="light"] {
     --foreground: #e8eaf6;
     --background: #f5f6fa;
     --accent: #3f51b5;
+    --accent-darker: #324191;
+    --accent-lighter: #a6b1f2;
     --tint: #dde1f0;
     --text-color: #1a1a2e;
     --muted-color: #6b7280;
+    --placeholder-lighter: #9ca3af;
     --footer-bg: #e8eaf6;
     --card-bg: rgba(0, 0, 0, 0.03);
     --card-border: rgba(0, 0, 0, 0.1);
@@ -56,7 +112,57 @@
     --dotted-mail-bg: #dde1f0;
     --dotted-mail-hover-bg: #3f51b5;
     --dotted-mail-hover-color: #ffffff;
-    --service-card-bg: rgba(63, 81, 181, 0.08);
+    --service-card-bg: rgba(63, 81, 181, 0.03);
+    --service-card-border: rgba(63, 81, 181, 0.1);
+    --service-card-border-hover: rgba(63, 81, 181, 0.2);
+    --service-card-inset-shadow: rgba(0, 0, 0, 0.02);
+    --service-card-shadow: rgba(0, 0, 0, 0.05);
+    --service-number-color: rgba(26, 26, 46, 0.4);
+    --service-number-border: rgba(63, 81, 181, 0.15);
+    --service-desc-color: rgba(26, 26, 46, 0.6);
+    --service-tag-color: rgba(26, 26, 46, 0.5);
+    --service-tag-border: rgba(63, 81, 181, 0.15);
+    --service-expanded-bg-1: rgba(255, 255, 255, 0.98);
+    --service-expanded-bg-2: rgba(245, 246, 250, 0.98);
+    --service-expanded-border: rgba(63, 81, 181, 0.15);
+    --service-close-bg: rgba(63, 81, 181, 0.08);
+    --service-close-color: rgba(26, 26, 46, 0.5);
+    --service-close-hover-bg: rgba(63, 81, 181, 0.15);
+    --service-close-hover-color: #1a1a2e;
+    --service-item-bg: rgba(63, 81, 181, 0.03);
+    --service-item-border: rgba(63, 81, 181, 0.1);
+    --service-item-hover-bg: rgba(63, 81, 181, 0.06);
+    --service-item-hover-border: rgba(63, 81, 181, 0.2);
+    --service-item-p: rgba(26, 26, 46, 0.65);
+    --service-cursor-follower-bg: rgba(63, 81, 181, 0.1);
+    --service-cursor-follower-border: rgba(63, 81, 181, 0.2);
+    --service-cursor-follower-text: #3f51b5;
+
+    /* Hero Section */
+    --hero-heading-gradient-start: #1a1a2e;
+    --hero-heading-gradient-end: rgba(26, 26, 46, 0.6);
+    --hero-subtext-color: rgba(26, 26, 46, 0.7);
+    --hero-badge-bg: rgba(63, 81, 181, 0.1);
+    --hero-badge-border: rgba(63, 81, 181, 0.2);
+    --hero-badge-text: #3f51b5;
+    --hero-image-glow: radial-gradient(circle, rgba(63, 81, 181, 0.2), transparent 70%);
+
+    /* Title Header */
+    --title-header-text: #1a1a2e;
+    --title-header-accent: rgba(26, 26, 46, 0.65);
+
+    /* Why Us / Work Section */
+    --work-header-text: #1a1a2e;
+    --work-header-accent: rgba(26, 26, 46, 0.65);
+    --work-accent-color: #3f51b5;
+
+    /* Contact Section */
+    --contact-item-border: rgba(63, 81, 181, 0.15);
+    --contact-item-bg: rgba(63, 81, 181, 0.05);
+    --contact-item-border-hover: rgba(63, 81, 181, 0.3);
+    --contact-svg-border: rgba(63, 81, 181, 0.25);
+    --contact-card-icon-border: rgba(63, 81, 181, 0.25);
+    --contact-text-p: rgba(26, 26, 46, 0.8);
 }
 
 * {

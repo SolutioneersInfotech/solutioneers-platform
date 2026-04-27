@@ -3,18 +3,7 @@
 @use './theme.module' as *;
 @use 'sass:color';
 
-/* Theme-aware color variables */
-:root {
-    --work-header-text: #ffffff;
-    --work-header-accent: rgba(255, 255, 255, 0.7);
-    --work-accent-color: #1a2078;
-}
 
-[data-theme="light"] {
-    --work-header-text: #1a1a2e;
-    --work-header-accent: rgba(26, 26, 46, 0.65);
-    --work-accent-color: #3f51b5;
-}
 
 .work {
     @include container(1300px);

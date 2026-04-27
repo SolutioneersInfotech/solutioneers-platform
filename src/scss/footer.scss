@@ -5,15 +5,15 @@
 
 .footer {
     @include container;
-    background: #000015;
-    color: $text-color;
+    background: var(--footer-bg);
+    color: var(--text-color);
     font-family: $font-sans;
 
     padding-block: clamp(3rem, 6vw, 5rem);
 
     border-radius: $radius-default $radius-default 0 0;
-    border: 1px solid rgba(255, 255, 255, .4);
-    border-bottom-color: #000015;
+    border: 1px solid var(--card-border-hover);
+    border-bottom-color: var(--footer-bg);
 }
 
 
@@ -49,23 +49,23 @@
 
         span {
             font-size: clamp(.9rem, 1.2vw, 1rem);
-            color: $text-color;
+            color: var(--text-color);
             text-transform: uppercase;
         }
 
         .dotted-mail {
             padding: .65rem 1.25rem;
-            background: color.adjust($background, $lightness: 10%);
-            color: color.adjust($text-color, $lightness: 0%);
-            border: 2px dashed $text-color;
+            background: var(--dotted-mail-bg);
+            color: var(--text-color);
+            border: 2px dashed var(--text-color);
             border-radius: $radius-capsule;
             font-size: clamp(.9rem, 1vw, 1rem);
             cursor: pointer;
             transition: background .3s ease, color .3s ease;
 
             &:hover {
-                background: $text-color;
-                color: #000015;
+                background: var(--dotted-mail-hover-bg);
+                color: var(--dotted-mail-hover-color);
             }
         }
     }
@@ -108,13 +108,13 @@
 
             li {
                 a {
-                    color: $text-color;
+                    color: var(--text-color);
                     text-decoration: none;
                     font-size: clamp(.9rem, 1vw, 1rem);
                     transition: color .3s ease;
 
                     &:hover {
-                        color: $accent;
+                        color: var(--accent);
                     }
                 }
             }
@@ -124,7 +124,7 @@
 
 
 hr {
-    border: 1px solid $text-color;
+    border: 1px solid var(--hr-color);
     margin-block: clamp(.75rem, 2vw, 1rem);
 }
 
@@ -153,13 +153,13 @@ hr {
 
         li {
             a {
-                color: $text-color;
+                color: var(--text-color);
                 font-size: clamp(1rem, 1.2vw, 1.2rem);
                 transition: color .3s ease;
                 text-decoration: none;
 
                 &:hover {
-                    color: $accent;
+                    color: var(--accent);
                 }
             }
         }

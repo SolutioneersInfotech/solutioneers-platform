@@ -9,17 +9,17 @@
     gap: 5px;
     label {
         font-size: .85rem;
-        color: $text-color;
+        color: var(--text-color);
     }
     .select {
         padding: 0.5rem;
         border-radius: $radius-small;
-        border: 1px solid rgba($color: #fff, $alpha: 0.1);
+        border: 1px solid var(--card-border);
         background: transparent;
         backdrop-filter: blur(8px);
         width: 100%;
         outline: none;
-        color: $input-text;
+        color: var(--text-color);
         font-size: .85rem;
         cursor: pointer;
 
@@ -30,22 +30,22 @@
 
         // focus state
         &:focus {
-            border-color: rgba($color: #fff, $alpha: 0.2);
+            border-color: var(--card-border-hover);
         }
 
         // dropdown options
         option {
-            color: $input-text;
-            background: #111; // needed because select background is transparent
+            color: var(--text-color);
+            background: var(--background); // needed because select background is transparent
         }
 
         // disabled option (placeholder option)
         option:disabled {
-            color: color.adjust($input-placeholder, $lightness: 20%);
+            color: var(--placeholder-lighter);
         }
     }
     .input-error {
-        color: $input-border-error;
+        color: #ff4d4f;
         font-size: .75rem;
         margin-top: .25rem;
     }

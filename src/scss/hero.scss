@@ -20,35 +20,36 @@
 
 .badge {
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(20, 20, 30, 0.6);
+    border: 1px solid var(--hero-badge-border);
+    background: var(--hero-badge-bg);
     padding: 0.4rem 1rem;
     backdrop-filter: blur(12px);
 }
 
 .shinyText {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--hero-badge-text);
 }
 
 .heading {
     font-size: clamp(2.5rem, 6vw, 5rem);
     font-weight: 600;
     line-height: 1.1;
-    margin: 2rem 0 1rem;
+    margin: 0rem 0 2rem;
     font-family: $font-display;
-    background: linear-gradient(to bottom right, #fff, rgba(255, 255, 255, 0.4));
+    background: linear-gradient(to bottom right, var(--hero-heading-gradient-start), var(--hero-heading-gradient-end));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .subtext {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    max-width: 700px;
+    font-size: 1.6rem;
+    line-height: 3.1rem;
+    color: var(--hero-subtext-color);
+    max-width: 1000px;
     font-family: $font-sans;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 
 .imageWrapper {
@@ -66,7 +67,7 @@
 .imageGlow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, rgba(255, 189, 122, 0.4), transparent 60%);
+    background: var(--hero-image-glow);
     filter: blur(120px);
     opacity: 0.5;
 }
