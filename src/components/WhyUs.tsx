@@ -38,7 +38,7 @@ export default function Page() {
                 cards={cards}
                 gap={35}
                 scaleFactor={0.06}
-                stickyTop={300}
+                stickyTop={50}
             />
         </section>
     )

@@ -4,7 +4,7 @@
 
 .hero {
     position: relative;
-    min-height: 80svh;
+    min-height: 80lvh;
     @include flex(column, center, center);
     position: relative;
     margin-block: clamp(2rem, 5vw, 4rem);
@@ -44,8 +44,8 @@
 }
 
 .subtext {
-    font-size: 1.6rem;
-    line-height: 3.1rem;
+    font-size: clamp(1.2rem, 1.5vw, 1.6rem);
+    line-height: clamp(1.6rem, 3vw, 3.1rem);
     color: var(--hero-subtext-color);
     max-width: 1000px;
     font-family: $font-sans;
