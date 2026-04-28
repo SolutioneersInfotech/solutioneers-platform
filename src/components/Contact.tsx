@@ -142,7 +142,7 @@ export default function Contact() {
                         ears.
                     </p>
                     <div className="contact-info">
-                        <div className="contact-item">
+                        <div className="contact-item-left">
                             <a href="mailto:info@solutioneers.in">
                                 <div className="card-icon">
                                     <IoMail />
@@ -156,7 +156,7 @@ export default function Contact() {
                             <FaArrowUpLong />
 
                         </div>
-                        <div className="contact-item">
+                        <div className="contact-item-left">
                             <a href="tel:+917376700783">
                                 <div className="card-icon">
                                     <FaPhoneAlt />
@@ -169,7 +169,7 @@ export default function Contact() {
                             <FaArrowUpLong />
 
                         </div>
-                        <div className="contact-item">
+                        <div className="contact-item-left">
                             <a
                                 href="https://www.google.com/maps/place/123+Main+St,+Your+City"
                                 target="_blank"
@@ -188,7 +188,7 @@ export default function Contact() {
                         </div>
                     </div>
                 </div>
-                <div className="right-form">
+                <div className="right-contact-form">
                     {submitStatus.type && (
                         <div
                             style={{
