@@ -64,36 +64,16 @@
 
     &--left {
       left: 0;
-      background: linear-gradient(
-        to right,
-        var(--marquee-bg, #ffffff),
-        transparent
-      );
-
-      @media (prefers-color-scheme: dark) {
-        background: linear-gradient(
-          to right,
-          var(--marquee-bg-dark, #09090b),
-          transparent
-        );
-      }
+      background: linear-gradient(to right,
+          var(--fade-gradient-color),
+          transparent);
     }
 
     &--right {
       right: 0;
-      background: linear-gradient(
-        to left,
-        var(--marquee-bg, #ffffff),
-        transparent
-      );
-
-      @media (prefers-color-scheme: dark) {
-        background: linear-gradient(
-          to left,
-          var(--marquee-bg-dark, #09090b),
-          transparent
-        );
-      }
+      background: linear-gradient(to left,
+          var(--fade-gradient-color),
+          transparent);
     }
   }
 }

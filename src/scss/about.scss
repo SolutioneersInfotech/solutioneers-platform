@@ -6,30 +6,39 @@
     @include container();
     @include flex(column, center, center);
 }
+
 .about {
     @include flex(row, center, center);
     padding: clamp(1rem, 5vw, 3rem);
     gap: 1rem;
-    background: var(--card-bg);
+    background: linear-gradient(135deg, var(--glass-bg), color-mix(in srgb, var(--glass-bg) 70%, transparent));
     border-radius: $radius-medium;
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
     text-align: justify;
-    border: 2px solid var(--card-border);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
     @media (max-width: 768px) {
         @include flex(column, center, center);
     }
 }
-.right, .left{
+
+.right,
+.left {
     width: 50%;
+
     @media(max-width: 768px) {
         width: 100%;
     }
 }
-.right p{
+
+.right p {
     font-size: clamp(0.9rem, 2vw, 1.2rem);
     font-family: $font-sans;
 }
-.bottom{
+
+.bottom {
     margin-block: 2rem;
     width: 100%;
     display: grid;
@@ -37,29 +46,37 @@
     grid-template-rows: repeat(2, 1fr);
     justify-items: center;
     gap: 2rem;
+
     @media (max-width: 768px) {
         grid-template-columns: repeat(1, 1fr);
     }
 }
-.cards{
+
+.cards {
     width: 100%;
     padding: clamp(1rem, 5vw, 3rem);
-    background: var(--card-bg);
+    background: linear-gradient(135deg, var(--glass-bg), color-mix(in srgb, var(--glass-bg) 70%, transparent));
     border-radius: $radius-medium;
-    backdrop-filter: blur(10px);
-    border: 2px solid var(--card-border);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.16);
     transition: all 0.3s ease;
-    h1{
+
+    h1 {
         font-size: clamp(1.5rem, 3vw, 2rem);
         font-family: $font-display;
         margin-bottom: 1rem;
     }
-    p{
+
+    p {
         font-size: clamp(0.9rem, 2vw, 1.2rem);
         font-family: $font-sans;
     }
-    &:hover{
-        transform: scale(1.01);
-        box-shadow: 0 8px 30px var(--card-border-hover);
+
+    &:hover {
+        transform: translateY(-2px) scale(1.01);
+        border-color: var(--card-border-hover);
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
 }

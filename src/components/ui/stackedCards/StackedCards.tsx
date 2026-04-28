@@ -107,11 +107,11 @@ function StackedCard({
         [0, index * 3]
     )
 
-    /* smooth opacity fade for better visual hierarchy */
+    /* Keep cards fully opaque so stacked content behind is not visible */
     const opacity = useTransform(
         scrollYProgress,
-        [0, 0.3, 1],
-        [0.7, 1, 1]
+        [0, 1],
+        [1, 1]
     )
 
     return (

@@ -4,6 +4,8 @@
 
 /* Theme-aware color variables */
 :root {
+    /* Dark mode solid background */
+    --card-bg: #1e2a5e;
     /* Adjusted alphas for better backdrop blur visibility */
     --card-accent-light: rgba(26, 32, 120, 0.4);
     --card-accent-darker: rgba(13, 16, 52, 0.2);
@@ -27,9 +29,11 @@
 }
 
 [data-theme="light"] {
-    /* Adjusted alphas for light mode glassmorphism */
-    --card-accent-light: rgba(255, 255, 255, 0.5);
-    --card-accent-darker: rgba(63, 81, 181, 0.05);
+    /* Light mode solid background */
+    --card-bg: #f5f7ff;
+    /* Solid background colors for light mode */
+    --card-accent-light: #f5f7ff;
+    --card-accent-darker: #e8ecff;
     --card-border-primary: rgba(63, 81, 181, 0.15);
     --card-border-hover: rgba(63, 81, 181, 0.3);
     --card-shadow-sm: rgba(0, 0, 0, 0.08);
@@ -73,30 +77,18 @@
     transform-style: preserve-3d;
     transform-origin: top center;
 
-    /* Functional glassmorphism backdrop */
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
-
-    background: linear-gradient(135deg,
-            var(--card-accent-light) 0%,
-            var(--card-accent-darker) 100%) !important;
+    background: var(--card-bg) !important;
 
     border: 1px solid var(--card-border-primary);
 
-    /* Enhanced shadow with color tint */
-    box-shadow:
-        0 8px 24px var(--card-shadow-sm),
-        0 30px 80px var(--card-shadow-lg),
-        inset 0 1px 0 var(--card-inset-light);
+    /* Simple shadow */
+    box-shadow: 0 8px 24px var(--card-shadow-sm);
 
     will-change: transform;
     transition: box-shadow 0.4s ease-out, border-color 0.4s ease-out;
 
     &:hover {
-        box-shadow:
-            0 12px 32px var(--card-shadow-sm),
-            0 40px 100px var(--card-shadow-hover),
-            inset 0 1px 0 var(--card-inset-hover);
+        box-shadow: 0 12px 32px var(--card-shadow-sm);
         border-color: var(--card-border-hover);
     }
 }
@@ -104,9 +96,7 @@
 .stackedCardImage {
     width: 25%;
     height: 100%;
-    background: linear-gradient(135deg,
-            var(--card-image-bg-primary) 0%,
-            var(--card-image-bg-secondary) 100%);
+    background: var(--card-image-bg-primary);
     border-right: 1px solid var(--card-image-border);
     @include flex(row, center, center);
     font-size: clamp(3rem, 10vw, 10rem);
@@ -115,21 +105,10 @@
     color: var(--card-text-primary);
     opacity: 0.9;
     font-family: $font-display;
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(45deg,
-                var(--card-overlay-1) 0%,
-                var(--card-overlay-2) 50%,
-                var(--card-overlay-3) 100%);
-        pointer-events: none;
-    }
 }
 
 .stackedCardContent {
-    width: 58%;
+    width: 75%;
     padding: 48px;
     display: flex;
     flex-direction: column;
@@ -166,10 +145,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg,
-            var(--card-accent-bar) 0%,
-            var(--card-accent-bar-fade) 50%,
-            transparent 100%);
+    background: var(--card-accent-bar);
 }
 
 @media (max-width: 768px) {

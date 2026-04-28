@@ -36,9 +36,9 @@ export default function Page() {
             </div>
             <StackedCards
                 cards={cards}
-                gap={15}
+                gap={35}
                 scaleFactor={0.06}
-                stickyTop={120}
+                stickyTop={300}
             />
         </section>
     )

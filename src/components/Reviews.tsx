@@ -43,7 +43,7 @@ export default function ReviewSection() {
         <section className="reviews">
             <div className="titleHeader">
                 <h2>Testimonials</h2>
-                <p>Real stories from businesses we've empowered</p>
+                <p>Real stories from businesses we&apos;ve empowered</p>
             </div>
             <div className="reviews-container">
                 {isLargeScreen ? (
